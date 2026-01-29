@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q, Min, Max
 from django.http import JsonResponse
 
-from home.models import Setting
+from home.models import FooterLink, Setting
 from properties.models import Property
 from utility.models import (
     City, Locality, PropertyType, PossessionIn,
@@ -46,6 +46,8 @@ def index(request):
     amenities = ProjectAmenities.objects.all()
     available_localities = Locality.objects.filter(parent__isnull=True).order_by('name')
     construction_statuses = Project.Construction_Status
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
+
     
     context = {
         'projects': queryset_list,
@@ -53,6 +55,7 @@ def index(request):
         "amenities": amenities,
         'construction_statuses': construction_statuses,
         'values': request.GET,
+        'footerlink': footerlink,
     }
     
     return render(request, 'projects/projects.html', context)
@@ -132,6 +135,9 @@ def search_projects(request):
     paginator = Paginator(projects, 9)
     projects_page = paginator.get_page(request.GET.get("page"))
 
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
+
+
     context = {
         "projects": projects_page,
         "settings_obj": settings_obj,
@@ -140,6 +146,7 @@ def search_projects(request):
         "bhk_choices": get_bhk_choices(),
         "selected_amenities": amenities,
         "selected_status": status,
+        "footerlink": footerlink,
         "selected_bhk": bhk,
         "selected_bhk_list": selected_bhk_list,
         "available_localities": Locality.objects.all().order_by("name"),
@@ -246,6 +253,9 @@ def residential_projects(request):
     paginator = Paginator(projects, 9)
     projects_page = paginator.get_page(request.GET.get("page"))
 
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
+
+
     context = {
         "projects": projects_page,
         "settings_obj": settings_obj,
@@ -259,6 +269,8 @@ def residential_projects(request):
         "values": request.GET,
         "available_localities": Locality.objects.all().order_by("name"),
         "selected_locality_ids": [str(x) for x in locality_ids],
+        "footerlink": footerlink,
+
     }
 
     return render(request, "projects/residential_list.html", context)
