@@ -1,0 +1,221 @@
+
+<!-- ===== Premium Floating Action Buttons ===== -->
+<div class="fixed bottom-6 right-6 z-[9999] flex flex-col items-center gap-4">
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/{{settings_obj.whatsapp}}"
+     target="_blank"
+     class="cta-float whatsapp">
+
+    <i class="fa-brands fa-whatsapp"></i>
+    <span>Chat</span>
+  </a>
+
+  <!-- Call Now -->
+  <a href="tel:{{settings_obj.phone}}"
+     class="cta-float call">
+
+    <i class="fa-solid fa-phone"></i>
+    <span>Call</span>
+  </a>
+
+</div>
+
+
+<style>
+/* Premium floating buttons */
+.cta-float {
+  width: 58px;
+  height: 58px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+  padding: 0 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.35s ease;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  cursor: pointer;
+}
+
+/* Expand on hover */
+.cta-float span {
+  max-width: 0;
+  opacity: 0;
+  transition: .35s ease;
+  font-size: 14px;
+}
+
+.cta-float:hover {
+  width: 150px;
+  justify-content: flex-start;
+  padding-left: 18px;
+}
+
+.cta-float:hover span {
+  max-width: 80px;
+  opacity: 1;
+}
+
+/* Colors */
+.whatsapp {
+  background: linear-gradient(135deg,#25d366,#128c7e);
+}
+
+.call {
+  background: linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+/* Soft pulse */
+.whatsapp {
+  animation: glow 1.8s infinite;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 0 0 rgba(37,211,102,.6); }
+  70% { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+
+</style>
+
+<header class="sticky top-0 z-50 border-b" style="background:{{ settings_obj.header_footer_color }};color:{{ settings_obj.text_color }}">
+
+
+  <hr>
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+
+    <!-- LOGO -->
+    <a href="/" class="flex items-center gap-2">
+      {% if settings_obj.logo %}
+        <img src="{{ settings_obj.logo.url }}" class="h-12">
+      {% else %}
+        <span class="text-xl font-bold">RealtyPro</span>
+      {% endif %}
+    </a>
+
+    <!-- DESKTOP MENU -->
+    <nav class="hidden lg:flex items-center gap-8 font-semibold">
+
+      <a href="/" class="flex items-center gap-2 hover:opacity-80">
+        <i class="fa-solid fa-house"></i> Home
+      </a>
+
+      <a href="{% url 'search_projects' %}" class="flex items-center gap-2 hover:opacity-80">
+        <i class="fa-solid fa-building"></i> Projects
+      </a>
+
+      <a href="{% url 'calculator' %}" class="flex items-center gap-2 hover:opacity-80">
+        <i class="fa-solid fa-calculator"></i> Calculator
+      </a>
+
+      <a href="{% url 'blog:blog_list' %}" class="flex items-center gap-2 hover:opacity-80">
+        <i class="fa-solid fa-pen-nib"></i> Blogs
+      </a>
+
+      <a href="{% url 'about' %}" class="flex items-center gap-2 hover:opacity-80">
+        <i class="fa-solid fa-circle-info"></i> About
+      </a>
+
+      <a href="{% url 'contact' %}" class="flex items-center gap-2 hover:opacity-80">
+        <i class="fa-solid fa-phone"></i> Contact
+      </a>
+
+    </nav>
+
+    <!-- CTA -->
+    <a href="{% url 'contact' %}" class="hidden lg:block px-5 py-2 rounded-lg font-semibold text-white" style="background:{{ settings_obj.button_color }}">
+      Enquire Now
+    </a>
+
+    <button id="openMenu" class="lg:hidden text-2xl">☰</button>
+
+  </div>
+</header>
+
+<div id="mobileDrawer" class="fixed top-0 right-0 w-[85%] sm:w-80 h-full bg-white shadow-2xl translate-x-full transition-transform duration-300 z-[999] flex flex-col">
+
+  <!-- LOGO -->
+  <div class="flex items-center justify-between px-5 py-4 border-b">
+    {% if settings_obj.logo %}
+      <img src="{{ settings_obj.logo.url }}" class="h-10 rounded-1">
+    {% else %}
+      <span class="text-xl font-bold">RealtyPro</span>
+    {% endif %}
+
+    <button id="closeMenu" class="text-3xl text-gray-500">&times;</button>
+  </div>
+
+  <!-- MENU -->
+  <nav class="flex-1 overflow-y-auto">
+
+    <a class="flex items-center gap-3 px-5 py-4 border-b" href="/">
+      <i class="fa-solid fa-house "></i> Home
+    </a>
+
+    <a class="flex items-center gap-3 px-5 py-4 border-b" href="{% url 'search_projects' %}">
+      <i class="fa-solid fa-building "></i> Projects
+    </a>
+
+    <a class="flex items-center gap-3 px-5 py-4 border-b" href="{% url 'calculator' %}">
+      <i class="fa-solid fa-calculator "></i> Calculator
+    </a>
+
+    <a class="flex items-center gap-3 px-5 py-4 border-b" href="{% url 'blog:blog_list' %}">
+      <i class="fa-solid fa-pen-nib "></i> Blogs
+    </a>
+
+    <a class="flex items-center gap-3 px-5 py-4 border-b" href="{% url 'about' %}">
+      <i class="fa-solid fa-circle-info "></i> About
+    </a>
+
+    <a class="flex items-center gap-3 px-5 py-4 border-b" href="{% url 'contact' %}">
+      <i class="fa-solid fa-phone "></i> Contact
+    </a>
+
+  </nav>
+
+
+  <div class="p-4 border-t bg-white space-y-3">
+
+    <!-- ENQUIRE -->
+    <a href="{% url 'contact' %}" class="block text-center py-3 rounded-lg text-white font-semibold shadow-sm" style="background:{{ settings_obj.button_color }}">
+      Enquire Now
+    </a>
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/{{ settings_obj.whatsapp }}" target="_blank" class="flex items-center justify-center gap-2 border rounded-lg py-2 text-green-600 font-semibold hover:bg-green-50 transition">
+      <i class="fa-brands fa-whatsapp text-xl"></i>
+      WhatsApp Us
+    </a>
+
+  </div>
+
+
+</div>
+
+<div id="drawerOverlay" class="fixed inset-0 bg-black/60 hidden z-[998]"></div>
+
+<script>
+const openMenu = document.getElementById("openMenu");
+const closeMenu = document.getElementById("closeMenu");
+const drawer = document.getElementById("mobileDrawer");
+const overlay = document.getElementById("drawerOverlay");
+
+openMenu.onclick = () => {
+  drawer.classList.remove("translate-x-full");
+  overlay.classList.remove("hidden");
+};
+
+closeMenu.onclick = () => {
+  drawer.classList.add("translate-x-full");
+  overlay.classList.add("hidden");
+};
+
+overlay.onclick = closeMenu.onclick;
+</script>
