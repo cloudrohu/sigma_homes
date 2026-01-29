@@ -149,10 +149,14 @@ def about_page_view(request):
             "awards_recognitions": 12,
         }
 
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
+
+
     context = {
         "about_page": about_page,
         "leaders": leaders,
         "settings_obj": settings_obj,
+        "footerlink": footerlink,
     }
     return render(request, "home/about.html", context)
 
@@ -170,10 +174,14 @@ def contact_view(request):
 
         messages.success(request, "Your message has been sent successfully!")
         return redirect("contact")  
+
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
+
     
     context = {
         "settings_obj": settings_obj,
         "contact_content": contact_content,
+        "footerlink": footerlink,
     }
 
     return render(request, "home/contact.html", context)
@@ -183,8 +191,10 @@ def faq_view(request):
     settings_obj = Setting.objects.first()
 
     faqs = FAQ.objects.all().order_by('id')
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
 
     context = {
+        "footerlink": footerlink,
         "settings_obj": settings_obj,
         "faqs": faqs,
     }
@@ -195,59 +205,73 @@ def faq_view(request):
 def get_setting():
 
     settings_obj = Setting.objects.filter(status="True").first()    
+    
 
     return Setting.objects.first()
 
 def privacy_policy(request):
 
     
-    settings_obj = Setting.objects.filter(status="True").first()    
+    settings_obj = Setting.objects.filter(status="True").first()  
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
+
     context = {
         "settings_obj": settings_obj,
+        "footerlink": footerlink,
     }
 
     return render(request, 'terms/privacy_policy.html', context)
 
 def terms_conditions(request):
     settings_obj = Setting.objects.filter(status="True").first()   
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
 
     context = {
         "settings_obj": settings_obj,
+        "footerlink": footerlink,
     }
     return render(request, 'terms/terms_conditions.html', context)
 
 def disclaimer(request):
-    settings_obj = Setting.objects.filter(status="True").first()    
+    settings_obj = Setting.objects.filter(status="True").first()  
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
 
     context = {
         "settings_obj": settings_obj,
+        "footerlink": footerlink,
+        
     }
     return render(request, 'terms/disclaimer.html', context)
 
 def cookies(request):
     settings_obj = Setting.objects.filter(status="True").first()    
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
 
     context = {
         "settings_obj": settings_obj,
+        "footerlink": footerlink,
     }
     return render(request, 'terms/cookies-policy.html', context)
 
 def services(request):
     settings_obj = Setting.objects.filter(status="True").first()    
     services = Service.objects.filter(is_active=True)
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
 
     context = {
         "settings_obj": settings_obj,
         "services": services,
+        "footerlink": footerlink,
     }
     return render(request, 'services/services.html', context)
 
 def calculator(request):
     settings_obj = Setting.objects.filter(status="True").first()    
-    
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
 
     context = {
         "settings_obj": settings_obj,
+        "footerlink": footerlink,
         
     }
     return render(request, 'home/calculator.html', context)

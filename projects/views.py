@@ -327,6 +327,7 @@ def project_details(request, id, slug):
     has_balcony = project.configurations.filter(balcony=True).exists()
     project_faqs = project.faqs.all()
     bank_offers = project.bank_offers.all()
+    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
 
     context = {
         "settings_obj": settings_obj,
@@ -340,6 +341,7 @@ def project_details(request, id, slug):
         "project_amenities": project_amenities,
         "project_faqs": project_faqs,   # ✅ ADD THIS
         "has_balcony": has_balcony,   
+        "footerlink": footerlink,
     }
 
     return render(request, "projects/project_detail.html", context)
