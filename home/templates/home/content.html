@@ -11,7 +11,7 @@
 
       <!-- Section Title -->
       <div class="text-center mb-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-orange-400 uppercase tracking-wide">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-orange-600 uppercase tracking-wide">
           Featured Projects
         </h2>
         <p class="text-gray-300 text-sm md:text-base">
@@ -26,200 +26,188 @@
 
             {% for rs in project_featured %}
             <div class="swiper-slide">
-              <div class="bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+              <div class="bg-white shadow-md hover:shadow-2xl transition-all duration-300 group-hover:scale-210 rounded-lg overflow-hidden border border-gray-200">
 
                 <!-- Image Section -->
                 <div class="relative h-60 w-full overflow-hidden">
-                  {% if rs.image %}
-                    <img src="{{ rs.image.url }}" alt="{{ rs.project_name }} " class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy">
-                  {% else %}
-                    <img src="{% static 'images/default-placeholder.jpg' %}" alt="Premium real estate project in Mumbai" class="w-full h-full object-cover" loading="lazy">
-                  {% endif %}
+                    {% if rs.image %}
+                      <img src="{{ rs.image.url }}" alt="{{ rs.project_name }} " class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy">
+                    {% else %}
+                      <img src="{% static 'images/default-placeholder.jpg' %}" alt="Premium real estate project in Mumbai" class="w-full h-full object-cover" loading="lazy">
+                    {% endif %}
 
-                        <span class="absolute top-3 left-3 bg-orange-500/90 backdrop-blur text-white text-[11px] font-semibold px-3 py-1 uppercase tracking-wide shadow-md border border-white/20">
-                            {{ rs.property_type }}
-                        </span>
 
                           <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur text-white text-[11px] font-semibold px-3 py-1 shadow-md border border-white/20">
                             {{ rs.construction_status }}
                           </span>
 
-                  <!-- Hover Icons -->
-                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition duration-300">
-                    <a href="{{ rs.get_absolute_url }}" class="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white transition">
-                      <i class="fas fa-link"></i>
-                    </a>
-                    <a href="{{ rs.get_absolute_url }}" class="bg-white p-3 rounded-full shadow hover:bg-orange-500 hover:text-white transition">
-                      <i class="fas fa-video"></i>
-                    </a>
-                  </div>
-                  
+            
                 </div>
 
-                <!-- Content -->
-                <div class="p-3 space-y-2">
+                      <!-- Content -->
+                      <div class="p-3 space-y-2">
 
-                    <div class="bg-white border border-gray-200 p-2 shadow-sm hover:shadow-md transition">
+                          <div class="bg-white border border-gray-200 p-2 shadow-sm hover:shadow-md transition">
 
-                          <!-- TOP ROW -->
-                          <div class="flex items-start justify-between gap-1">
+                                <!-- TOP ROW -->
+                                <div class="flex items-start justify-between gap-1">
 
-                            <div class="flex-1">
-                            <h3 class="text-lg font-semibold text-gray-900 hover:text-orange-600 transition leading-tight line-clamp-2">
-                              {{ rs.project_name }}
-                            </h3>
+                                  <div class="flex-1">
+                                  <h3 class="text-lg font-semibold text-gray-900 hover:text-orange-600 transition leading-tight line-clamp-2">
+                                    {{ rs.project_name }}
+                                  </h3>
 
-                            <p class="text-sm text-gray-600 flex items-center gap-1 mt-1">
-                                <i class="fas fa-map-marker-alt text-orange-500"></i>
-                                {{ rs.locality.name }}
-                              </p>
-                            </div>
+                                  <p class="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                                      <i class="fas fa-map-marker-alt text-orange-500"></i>
+                                      {{ rs.locality.name }}
+                                    </p>
+                                  </div>
 
-                            <div class="text-right shrink-0">
-                              {% if rs.min_price and rs.max_price %}
-                                <p class="text-sm font-bold text-orange-600">
-                                  ₹{{ rs.min_price|indian_price }} – ₹{{ rs.max_price|indian_price }}
-                                </p>
-                              {% elif rs.min_price %}
-                                <p class="text-sm font-bold text-orange-600">
-                                  ₹{{ rs.min_price|indian_price }}+
-                                </p>
-                              {% else %}
-                                <p class="text-xs text-gray-400 italic">
-                                  Price on request
-                                </p>
-                              {% endif %}
-                            </div>
-
-                          </div>
-
-                          <!-- DIVIDER -->
-                          <div class="border-t border-gray-100 my-2"></div>
-
-                          <!-- BOTTOM ROW -->
-                          <div class="flex items-center justify-between text-sm">
-
-                            <!-- Developer -->
-                            <div>
-                              <span class="text-xs uppercase tracking-wide text-gray-400">Developer</span>
-                              <p class="font-semibold text-gray-700">
-                                {{ rs.developer }}
-                              </p>
-                            </div>
-
-                              <!-- Area -->
-                              <div class="text-right">
-                                <span class="text-xs uppercase tracking-wide text-gray-400">Carpet Start</span>
-                              <p class="font-semibold text-gray-700">
-                                {{ rs.get_carpet_area_range|cut:" sqft"|slice:":4" }} sqft
-                              </p>
-                              </div>
-
-                            <!-- Possession -->
-                            <div class="text-right">
-                              <span class="text-xs uppercase tracking-wide text-gray-400">Possession</span>
-                              <p class="font-semibold text-green-700">
-                                {{ rs.possession_month }} {{ rs.possession_year }}
-                              </p>
-                            </div>
-
-                          </div>
-
-                    </div>
-
-                    <!-- ================= CONFIGURATION CARD ================= -->
-                    <div class="config-card border bg-white mt-2 h-[140px] flex flex-col overflow-hidden">
-
-                      {% with rs.configurations.all as configs %}
-                      {% if configs %}
-                      {% regroup configs by bhk_type as bhk_groups %}
-
-                      <!-- ================= TABS ================= -->
-                      <div class="border-b border-gray-200 flex-shrink-0">
-                        <div class="bhk-tabs flex gap-1 text-sm font-semibold px-2 py-1 whitespace-nowrap relative">
-                          <span class="bhk-underline absolute bottom-0 h-[3px]"></span>
-
-                          {% for group in bhk_groups %}
-                          <button type="button"
-                            class="bhk-tab px-3 py-2 transition-all {% if forloop.first %}active{% endif %}"
-                            data-target="bhk-{{ rs.id }}-{{ forloop.counter }}">
-                            {{ group.grouper }}
-                          </button>
-                          {% endfor %}
-                        </div>
-                      </div>
-
-                      <!-- ================= PANELS ================= -->
-                      <div class="flex-1 overflow-hidden">
-
-                        {% for group in bhk_groups %}
-                        <div class="bhk-panel {% if not forloop.first %}hidden{% endif %} h-full"
-                          data-panel="bhk-{{ rs.id }}-{{ forloop.counter }}">
-
-                          <div class="table-scroll h-full overflow-y-auto bg-white">
-
-                            <table class="w-full text-xs sm:text-sm border-collapse">
-                              <thead class="bg-gray-50 sticky top-0">
-                                <tr class="text-center font-bold text-gray-700">
-                                  <th class="px-2 py-2 border-b">Area</th>
-                                  <th class="px-2 py-2 border-b">Price</th>
-                                  <th class="px-2 py-2 border-b">Parking</th>
-                                  <th class="px-2 py-2 border-b">Balcony</th>
-                                </tr>
-                              </thead>
-
-                              <tbody class="text-center">
-                                {% for cfg in group.list %}
-                                <tr class="h-[32px] {% if cfg.sold_out %}bg-red-50{% endif %}">
-                                  <td class="px-2 py-2 border-b">{{ cfg.area_sqft }} sqft</td>
-
-                                  <td class="px-2 py-2 border-b font-semibold">
-                                    {% if cfg.sold_out %}
-                                      <span class="bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold">SOLD OUT</span>
+                                  <div class="text-right shrink-0">
+                                    {% if rs.min_price and rs.max_price %}
+                                      <p class="text-sm font-bold text-orange-600">
+                                        ₹{{ rs.min_price|indian_price }} – ₹{{ rs.max_price|indian_price }}
+                                      </p>
+                                    {% elif rs.min_price %}
+                                      <p class="text-sm font-bold text-orange-600">
+                                        ₹{{ rs.min_price|indian_price }}+
+                                      </p>
                                     {% else %}
-                                      <span class="font-extrabold text-orange-600">{{ cfg.formatted_price }}</span>
+                                      <p class="text-xs text-gray-400 italic">
+                                        Price on request
+                                      </p>
                                     {% endif %}
-                                  </td>
+                                  </div>
 
-                                  <td class="px-2 py-2 border-b">
-                                    {{ cfg.parking|yesno:"Yes,*" }}
-                                  </td>
+                                </div>
 
-                                  <td class="px-2 py-2 border-b">
-                                    {{ cfg.balcony|yesno:"Yes,*" }}
-                                  </td>
-                                </tr>
-                                {% endfor %}
-                              </tbody>
-                            </table>
+                                <!-- DIVIDER -->
+                                <div class="border-t border-gray-100 my-2"></div>
+
+                                <!-- BOTTOM ROW -->
+                                <div class="flex items-center justify-between text-sm">
+
+                                  <!-- Developer -->
+                                  <div>
+                                    <span class="text-xs uppercase tracking-wide text-gray-400">Developer</span>
+                                    <p class="font-semibold text-gray-700">
+                                      {{ rs.developer }}
+                                    </p>
+                                  </div>
+
+                                    <!-- Area -->
+                                    <div class="text-right">
+                                      <span class="text-xs uppercase tracking-wide text-gray-400">Carpet Start</span>
+                                    <p class="font-semibold text-gray-700">
+                                      {{ rs.get_carpet_area_range|cut:" sqft"|slice:":4" }} sqft
+                                    </p>
+                                    </div>
+
+                                  <!-- Possession -->
+                                  <div class="text-right">
+                                    <span class="text-xs uppercase tracking-wide text-gray-400">Possession</span>
+                                    <p class="font-semibold text-green-700">
+                                      {{ rs.possession_month }} {{ rs.possession_year }}
+                                    </p>
+                                  </div>
+
+                                </div>
 
                           </div>
-                        </div>
-                        {% endfor %}
+
+                          <!-- ================= CONFIGURATION CARD ================= -->
+                          <div class="config-card border bg-white mt-2 h-[140px] flex flex-col overflow-hidden">
+
+                            {% with rs.configurations.all as configs %}
+                            {% if configs %}
+                            {% regroup configs by bhk_type as bhk_groups %}
+
+                            <!-- ================= TABS ================= -->
+                            <div class="border-b border-gray-200 flex-shrink-0">
+                              <div class="bhk-tabs flex gap-1 text-sm font-semibold px-2 py-1 whitespace-nowrap relative">
+                                <span class="bhk-underline absolute bottom-0 h-[3px]"></span>
+
+                                {% for group in bhk_groups %}
+                                <button type="button"
+                                  class="bhk-tab px-3 py-2 transition-all {% if forloop.first %}active{% endif %}"
+                                  data-target="bhk-{{ rs.id }}-{{ forloop.counter }}">
+                                  {{ group.grouper }}
+                                </button>
+                                {% endfor %}
+                              </div>
+                            </div>
+
+                            <!-- ================= PANELS ================= -->
+                            <div class="flex-1 overflow-hidden">
+
+                              {% for group in bhk_groups %}
+                              <div class="bhk-panel {% if not forloop.first %}hidden{% endif %} h-full"
+                                data-panel="bhk-{{ rs.id }}-{{ forloop.counter }}">
+
+                                <div class="table-scroll h-full overflow-y-auto bg-white">
+
+                                  <table class="w-full text-xs sm:text-sm border-collapse">
+                                    <thead class="bg-gray-50 sticky top-0">
+                                      <tr class="text-center font-bold text-gray-700">
+                                        <th class="px-2 py-2 border-b">Area</th>
+                                        <th class="px-2 py-2 border-b">Price</th>
+                                        <th class="px-2 py-2 border-b">Parking</th>
+                                        <th class="px-2 py-2 border-b">Balcony</th>
+                                      </tr>
+                                    </thead>
+
+                                    <tbody class="text-center">
+                                      {% for cfg in group.list %}
+                                      <tr class="h-[32px] {% if cfg.sold_out %}bg-red-50{% endif %}">
+                                        <td class="px-2 py-2 border-b">{{ cfg.area_sqft }} sqft</td>
+
+                                        <td class="px-2 py-2 border-b font-semibold">
+                                          {% if cfg.sold_out %}
+                                            <span class="bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold">SOLD OUT</span>
+                                          {% else %}
+                                            <span class="font-extrabold text-orange-600">{{ cfg.formatted_price }}</span>
+                                          {% endif %}
+                                        </td>
+
+                                        <td class="px-2 py-2 border-b">
+                                          {{ cfg.parking|yesno:"Yes,*" }}
+                                        </td>
+
+                                        <td class="px-2 py-2 border-b">
+                                          {{ cfg.balcony|yesno:"Yes,*" }}
+                                        </td>
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+
+                                </div>
+                              </div>
+                              {% endfor %}
+
+                            </div>
+
+                            {% else %}
+                            <!-- ================= NO CONFIG ================= -->
+                            <div class="flex-1 flex items-center justify-center text-sm text-gray-500 text-center px-2">
+                              Configuration details available on request
+                            </div>
+                            {% endif %}
+                            {% endwith %}
+
+                          </div>
 
                       </div>
 
-                      {% else %}
-                      <!-- ================= NO CONFIG ================= -->
-                      <div class="flex-1 flex items-center justify-center text-sm text-gray-500 text-center px-2">
-                        Configuration details available on request
+                    <!-- Footer Button -->
+                    <div class="bg-orange-500 text-center py-1 hover:bg-orange-600 transition">
+                      <div class="px-2 pb-1">
+                        <a href="{{ rs.get_absolute_url }}" target="_blank" class="block text-center py-2.5 font-bold tracking-wide text-sm text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition shadow-md">
+                          SEE DETAILS
+                        </a>
                       </div>
-                      {% endif %}
-                      {% endwith %}
 
                     </div>
-
-                </div>
-
-                <!-- Footer Button -->
-                <div class="bg-orange-500 text-center py-1 hover:bg-orange-600 transition">
-                  <div class="px-2 pb-1">
-                    <a href="{{ rs.get_absolute_url }}" target="_blank" class="block text-center py-2.5 font-bold tracking-wide text-sm text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition shadow-md">
-                      SEE DETAILS
-                    </a>
-                  </div>
-
-                </div>
               </div>
             </div>
 
@@ -276,36 +264,21 @@
             NEW LAUNCH PROJECTS
           </h2>
 
-          <!-- Tabs -->
-          <div class="flex flex-wrap justify-center mb-8 gap-3">
-            <button data-tab="residential" class="tab-btn active px-6 py-2 font-semibold shadow transition">
-              Residential
-            </button>
-            <button data-tab="commercial" class="tab-btn bg-gray-200 text-gray-800 px-6 py-2 font-semibold hover:bg-orange-200 transition">
-              Commercial
-            </button>
-          </div>
-
           <!-- residential TAB -->
-          <div id="residential" class="tab-content">
-            <div class="swiper newLaunchSwiper">
-              <div class="swiper-wrapper">
-
+          <div id="residential" class="tab-contentrounded-lg">
+            <div class="swiper newLaunchSwiper rounded-lg">
+              <div class="swiper-wrapper rounded-lg">
                 {% for project in new_launch_residential %}
-                <div class="swiper-slide bg-white flex flex-col overflow-hidden border border-gray-200 hover:shadow-xl transition min-h-[520px] max-h-[520px]">
+                <div class="swiper-slide bg-white flex flex-col rounded-2xl border border-gray-200 hover:shadow-xl transition min-h-[520px] max-h-[520px] overflow-hidden">
 
                     <!-- IMAGE SECTION -->
-                    <div class="relative h-[180px] sm:h-[210px] lg:h-[230px] overflow-hidden">
+                    <div class="relative h-[180px]  sm:h-[210px] lg:h-[230px] overflow-hidden">
 
                       {% if project.image %}
-                        <img src="{{ project.image.url }}" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105" alt="{{ project.project_name }}" loading="lazy">
+                        <img src="{{ project.image.url }}" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105 rounded-t-2xl" loading="lazy">>
                       {% else %}
                         <img src="https://dummyimage.com/400x250/cccccc/000000&text=No+Image" class="w-full h-full object-cover" alt="Premium real estate project in Mumbai">
                       {% endif %}
-
-                      <span class="absolute top-3 left-3 bg-orange-500 text-white text-xs px-3 py-1 rounded">
-                        NEW LAUNCH
-                      </span>
 
                       <span class="absolute bottom-3 right-3 bg-black text-white text-xs px-3 py-1 rounded">
                         Residential
@@ -436,63 +409,7 @@
                 {% endfor %}
 
               </div>
-
               
-            </div>
-          </div>
-
-
-          <!-- COMMERCIAL TAB -->
-          <div id="commercial" class="tab-content hidden">
-          <div class="swiper newLaunchSwiper">
-              <div class="swiper-wrapper">
-
-                {% for project in new_launch_commercial %}
-                <div class="swiper-slide bg-white shadow-lg rounded overflow-hidden border-t-4 border-orange-500 hover:shadow-xl transition">
-
-                  <div class="relative">
-                    {% if project.image %}
-                      <img src="{{ project.image.url }}" class="w-full h-48 object-cover" alt="{{ project.project_name }}" loading="lazy">
-                    {% else %}
-                      <img src="https://dummyimage.com/400x250/cccccc/000000&text=No+Image" class="w-full h-48 object-cover" alt="Premium real estate project in Mumbai">
-                    {% endif %}
-
-                    <span class="absolute top-3 left-3 bg-orange-500 text-white text-xs px-3 py-1 ">
-                      NEW LAUNCH
-                    </span>
-
-                    <span class="absolute bottom-3 right-3 bg-black text-white text-xs px-3 py-1 ">
-                      Commercial
-                    </span>
-                  </div>
-
-                  <div class="p-4">
-                    <p class="text-lg font-bold text-gray-700">
-                      {{ project.project_name }}
-                    </p>
-
-                    <p class="text-orange-600 font-semibold mt-1">
-                      {{ project.get_configuration_details|linebreaksbr }}
-                    </p>
-
-                    <p class="text-sm text-gray-600 mt-1">
-                      <i class="fas fa-map-marker-alt text-orange-500"></i>
-                      {{ project.locality.name }}, {{ project.city.name }}
-                    </p>
-                  </div>
-
-                  <div class="bg-orange-500 text-center">
-                    <a href="{{ project.get_absolute_url }}"
-                      class="block text-white font-bold w-full py-3 uppercase">
-                      See Details
-                    </a>
-                  </div>
-                </div>
-                {% empty %}
-                  <p class="text-center text-gray-500">No Commercial New Launch Projects</p>
-                {% endfor %}
-
-              </div>
             </div>
           </div>
 
@@ -536,7 +453,7 @@
       <div class="lg:col-span-8 grid md:grid-cols-3 gap-6">
 
         <!-- CARD 1 -->
-        <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=Ready+To+Move&rera=" class="group relative  overflow-hidden shadow-lg border border-gray-100">
+        <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=Ready+To+Move&rera=" class="group relative  overflow-hidden rounded-xl shadow-lg border border-gray-100">
           <img src="https://sigmahomes.co.in/media/images/aerial_view-new.webp" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="Ready to Move" >
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
@@ -563,7 +480,7 @@
         </a>
 
         <!-- CARD 2 -->
-        <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=Under+Construction&rera=" class="group relative  overflow-hidden shadow-lg border border-gray-100">
+        <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=Under+Construction&rera=" class="group relative rounded-xl overflow-hidden shadow-lg border border-gray-100">
           <img src="https://sigmahomes.co.in/media/images/Elevation_Render_1_fQvU_1.webp" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="Early Possession">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
@@ -590,7 +507,7 @@
         </a>
 
         <!-- CARD 3 -->
-        <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=New+Launch&rera=" class="group relative  overflow-hidden shadow-lg border border-gray-100">
+        <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=New+Launch&rera=" class="group relative rounded-xl overflow-hidden shadow-lg border border-gray-100">
           <img src="https://sigmahomes.co.in/media/images/Road-To-Elevation-3.webp" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="New Launch">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
@@ -710,7 +627,7 @@
       <!-- TEXT SIDE -->
       <div data-aos="fade-left">
 
-        <h2 class="text-2xl md:text-3xl font-bold text-orange-600 mb-4 text-center md:text-left">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-uppercase text-orange-600 mb-4 text-center md:text-left">
           Why Choose Us
         </h2>
 
@@ -745,7 +662,7 @@
 
     <div class="max-w-md mx-auto px-4 text-center">
 
-      <h2 class="text-2xl font-bold text-orange-600 mb-6">
+      <h2 class="text-2xl font-extrabold text-orange-600 mb-6 text-uppercase">
         Why Choose Us
       </h2>
 
