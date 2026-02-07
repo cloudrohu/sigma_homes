@@ -14,7 +14,7 @@
 
 <main>
     <!-- ================= PROJECT HEADER ================= -->
-    <section class="border-b bg-white">
+    <section class="border-b bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
         <div class="max-w-6xl mx-auto px-4 py-4 lg:py-6 sticky top-0 z-[999]">
 
             <!-- BREADCRUMB -->
@@ -1741,23 +1741,28 @@ document.getElementById("emiResult").innerHTML =
 
 const navLinks = document.querySelectorAll(".nav-link");
 const navScroll = document.getElementById("navScroll");
-const navLeft = document.getElementById("navLeft");
-const navRight = document.getElementById("navRight");
 
-/* ACTIVE TAB ON CLICK */
-navLinks.forEach(link => {
-link.addEventListener("click", () => {
-    document.querySelector(".nav-link.active")?.classList.remove("active");
-    link.classList.add("active");
+if (navLinks.length && navScroll) {
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      document.querySelector(".nav-link.active")
+        ?.classList.remove("active");
 
-    const linkPos =
-    link.offsetLeft -
-    navScroll.offsetWidth / 2 +
-    link.offsetWidth / 2;
+      link.classList.add("active");
 
-    navScroll.scrollTo({ left: linkPos, behavior: "smooth" });
-});
-});
+      const linkPos =
+        link.offsetLeft -
+        navScroll.offsetWidth / 2 +
+        link.offsetWidth / 2;
+
+      navScroll.scrollTo({
+        left: linkPos,
+        behavior: "smooth",
+      });
+    });
+  });
+}
+
 
 /* LEFT RIGHT SCROLL */
 navLeft.addEventListener("click", () => {
