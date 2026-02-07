@@ -26,7 +26,7 @@
 
             {% for rs in project_featured %}
             <div class="swiper-slide">
-              <div class="bg-white shadow-md hover:shadow-2xl transition-all duration-300 group-hover:scale-210 rounded-lg overflow-hidden border border-gray-200">
+              <div class="bg-white shadow-md hover:shadow-2xl transition-all duration-300 group-hover:scale-210 rounded-xl overflow-hidden border border-gray-200">
 
                 <!-- Image Section -->
                 <div class="relative h-60 w-full overflow-hidden">
@@ -411,6 +411,8 @@
               </div>
               
             </div>
+
+      
           </div>
 
 
@@ -444,7 +446,7 @@
 
         <!-- CTA -->
         <div class="mt-6">
-          <a href="{% url 'search_projects' %}" target="_blank" class="inline-flex items-center justify-center px-7 py-3 text-white font-bold bg-gradient-to-r from-[#002D62] to-[#0b4aa0] shadow hover:opacity-95 transition">View All Projects</a>
+          <a href="{% url 'search_projects' %}" target="_blank" class="inline-flex items-center justify-center px-7 py-3 text-white font-bold bg-gradient-to-r from-[#002D62] to-[#0b4aa0] rounded shadow hover:opacity-95 transition">View All Projects</a>
         </div>
 
       </div>
@@ -1055,28 +1057,6 @@
   </section>
   <!-- LOCALITY END -->
 
-  <!-- 💬 TESTIMONIALS -->
-  <section class="py-16 bg-gray-100" id="testimonial">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold text-orange-600 mb-10">Testimonials</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        {% for t in testimonials %}
-        <div class="bg-white shadow rounded p-2" data-aos="fade-up">
-          {% if t.image %}
-          <img src="{{ t.image.url }}" class="w-16 h-16 rounded-full mx-auto mb-3" />
-          {% endif %}
-          <p class="text-gray-700 italic">"{{ t.message }}"</p>
-          <h3 class="mt-3 font-bold">{{ t.name }}</h3>
-          {% if t.designation %}<p class="text-sm text-gray-500">{{ t.designation }}</p>{% endif %}
-          <p class="text-yellow-400 mt-2">{% for i in "12345"|slice:":t.rating" %}⭐{% endfor %}</p>
-        </div>
-        {% empty %}
-        <p>No testimonials available.</p>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  <!-- 💬 TESTIMONIALS -->
 
   <!-- LEFT DETAILS + RIGHT FORM CONTACT SECTION -->
   <section id="contact" class="py-14 bg-orange-50">
