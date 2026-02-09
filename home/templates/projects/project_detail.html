@@ -1360,7 +1360,7 @@
                         <a href="{% url 'project_details' rp.id rp.slug %}" class="flex-[2] text-center text-xs font-bold bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-sm">
                         VIEW DETAILS
                         </a>
-                        <a href="https://wa.me/91{{ settings_obj.phone }}" target="_blank" class="group flex-1 flex items-center justify-center border border-green-500/30 rounded-lg hover:bg-green-500 transition-all duration-300">
+                        <a  href="https://wa.me/91{{ settings_obj.whatsapp }}?text=Hi%20I%20am%20interested%20in%20{{ rp.project_name }}%20located%20at%20{{ rp.locality.name }}.%20Please%20share%20latest%20price%2C%20availability%20and%20site%20visit%20details.">
                             <img src="{% static 'projects/assets/fonts/whatsapp-color-svgrepo-com.svg' %}"  alt="WA"  class="w-5 h-5 transition-all duration-300 group-hover:brightness-0 group-hover:invert">
                         </a>
                     </div>
