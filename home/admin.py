@@ -89,6 +89,7 @@ class SettingAdmin(admin.ModelAdmin):
         ("⚙️ Extra Settings", {
             "fields": (
                 "search_bg",
+                "search_bg_mobile",
                 "testmonial_bg",
                 "rera_number",
                 "footer_text",

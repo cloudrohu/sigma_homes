@@ -155,6 +155,7 @@ def search_projects(request):
 
     return render(request, "projects/residential_list.html", context)
    
+   
 def residential_projects(request):
     settings_obj = Setting.objects.first()
 

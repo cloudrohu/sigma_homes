@@ -6,9 +6,9 @@
   <section class="relative flex flex-col items-center text-center text-white h-[500px] bg-cover bg-center bg-no-repeat overflow-hidden pt-36" style="background-image: url('{% if settings_obj.search_bg %}{{ settings_obj.search_bg.url }}{% else %}{% static 'images/central-mumbai.jpeg' %}{% endif %}');">
 
     <!-- HEADING (padding kam ki) -->
-    <div class=" w-[90%] md:w-[30%] rounded-2xl px-4 py-2 mb-1  mt-16 ">
+    <div class=" w-[90%] md:w-[30%] rounded-2xl px-4 py-1 mb-1 mt-12 ">
       <h1 class="text-3xl md:text-4xl font-bold mb-1 text-[#555555]">Find Your Dream Property</h1>
-      <p class="text-gray-700 text-base font-semibold">Start Your Story with Us!</p>
+      <p class="text-gray-700 text-base font-semibold">Start Your Journey with Us!</p>
     </div>
 
     <!-- SEARCH BOX -->
@@ -21,7 +21,7 @@
         </select>
 
         <div class="relative flex-grow">
-          <input id="searchInput" type="text" placeholder="Select Locality" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white/90" autocomplete="off"/>
+          <input id="searchInput" type="text" placeholder="Search Locality, Projects" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white/90" autocomplete="off"/>
           <ul id="suggestionBox" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto hidden z-50"></ul>
         </div>
 
@@ -30,40 +30,50 @@
       </div>
     </div>
 
-    <!-- ZERO BROKERAGE (upar laya gaya) -->
-    <div class="flex items-center gap-4 bg-gray-100 px-6 py-3 rounded-full mt-6 shadow-md w-fit mx-auto">
+    <div class="flex flex-wrap items-center justify-center mt-3 gap-4 bg-white/80 backdrop-blur-md px-5 py-2 rounded-full shadow-md border border-gray-200 text-sm font-medium">
 
-      <div class="flex items-center gap-2 text-[#0b7a44] font-medium">
-        <i class="fas fa-handshake text-lg"></i>
-        Zero Brokerage
-      </div>
-
-      <div class="h-6 w-px bg-gray-400"></div>
-
-      <div class="flex items-center gap-2 text-[#0b7a44] font-medium">
-        <div class="w-6 h-6">
-          <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="256" cy="256" r="240" fill="#fff" stroke="#d9362a" stroke-width="35"/>
-            <circle cx="256" cy="256" r="180" fill="#fff" stroke="#000" stroke-width="10"/>
-            <text x="256" y="300" text-anchor="middle" font-size="70" fill="#000" font-family="Arial Black">RERA</text>
-          </svg>
+        <!-- Zero Brokerage -->
+        <div class="flex items-center gap-2 text-[#0b7a44]">
+            <i class="fas fa-handshake text-base"></i>
+            <span>Zero Brokerage</span>
         </div>
-       RERA Registered Properties
-      </div>
+
+        <div class="hidden sm:block h-4 w-px bg-gray-300"></div>
+
+        <!-- RERA -->
+        <div class="flex items-center gap-2 text-[#0b7a44]">
+            <div class="w-5 h-5 flex items-center justify-center">
+                <svg viewBox="0 0 512 512" class="w-full h-full">
+                    <circle cx="256" cy="256" r="240" fill="#fff" stroke="#d9362a" stroke-width="35"/>
+                    <circle cx="256" cy="256" r="180" fill="#fff" stroke="#000" stroke-width="10"/>
+                    <text x="256" y="300" text-anchor="middle" font-size="120" fill="#000" font-family="Arial Black">R</text>
+                </svg>
+            </div>
+            <span>RERA Registered</span>
+        </div>
+
+        <div class="hidden sm:block h-4 w-px bg-gray-300"></div>
+
+        <!-- Verified -->
+        <div class="flex items-center gap-2 text-[#0b7a44]">
+            <img src="{% static 'projects/assets/fonts/verify.png' %}" 
+                class="w-5 h-5 object-contain" 
+                alt="Verified">
+            <span>100% Verified</span>
+        </div>
 
     </div>
+
+
 
   </section>
 </div>
 
-
-
 <div class="md:hidden">
-  <section class="relative flex flex-col items-center text-center text-white 
-h-[500px] pt-44 bg-cover bg-center bg-no-repeat overflow-hidden"
+   <section class="relative flex flex-col items-center text-center text-white h-[500px] pt-44 bg-cover bg-center bg-no-repeat overflow-hidden">
 
-    <!-- ✅ Optimized Image (not CSS bg) -->
-    <img src="{% if settings_obj.search_bg %}{{ settings_obj.search_bg.url }}{% else %}{% static 'images/central-mumbai.webp' %}{% endif %}" loading="eager  fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" alt="Real estate background">
+      <!-- ✅ Optimized Image (not CSS bg) -->
+    <img src="{% if settings_obj.search_bg_mobile %}{{ settings_obj.search_bg_mobile.url }}{% else %}{{ settings_obj.search_bg.url }}{% endif %}" loading="eager"  fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" alt="Real estate background">
 
     <!-- Dark overlay (cheap + improves text clarity) -->
     <div class="absolute inset-0 bg-black/25"></div>
@@ -71,10 +81,9 @@ h-[500px] pt-44 bg-cover bg-center bg-no-repeat overflow-hidden"
     <!-- CONTENT -->
     <div class="relative z-10 w-full px-4">
 
-      <h2 class="text-2xl font-bold mb-2">Real Estate Made Real Easy</h2>
+      <h2 class="text-2xl font-bold mb-2">Find Your Dream Property</h2>
       <p class="text-gray-300 mb-5 text-sm">
-        We’ve got you covered! From finding property to 
-        <span class="text-pink-400 font-semibold">Interiors</span>
+        Start Your Journey with Us! 
       </p>
 
 

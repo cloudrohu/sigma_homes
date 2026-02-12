@@ -5,6 +5,30 @@
 
 <main>
 
+<style>
+  .shield-icon {
+    filter: drop-shadow(0 0 15px rgba(34,197,94,0.4));
+    transition: transform 0.4s ease;
+  }
+
+  .shield-icon:hover {
+    transform: scale(1.08);
+  }
+
+  .check-path {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: drawCheck 1s ease forwards;
+    animation-delay: 0.4s;
+  }
+
+  @keyframes drawCheck {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>  
+
   <!-- FEATURE PROJECTS -->
   <section class="bg-[#f8fafc] py-16 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4">
@@ -899,34 +923,138 @@
   <!-- Blog Section End -->
 
   <br>
-  <!-- STATS COUNTER -->
-  <section class="py-20 bg-[#0f172a] text-white">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
 
-      {% for item in impactmetric %}
+  <!-- Achievements Section -->
+  <section class="relative py-8 text-white overflow-hidden bg-[#0b1220]">
 
-      <div class="group">
-        
-        <!-- PROGRESS LINE -->
-        <div class="h-1 bg-orange-500 rounded-full mb-3"
-            style="width: {{ item.value|cut:'+'|cut:'%' }}%; max-width: 100%;"></div>
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2070" class="w-full h-full object-cover opacity-20">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0b1220]/95 to-[#0b1220]"></div>
+    </div>
 
-        <!-- ICON + VALUE -->
-        <div class="flex items-center gap-3">
-          <i class="{{ item.icon }} text-orange-400 text-2xl"></i>
-          <h3 class="text-4xl font-bold">{{ item.value }}</h3>
+    <div class="relative max-w-7xl mx-auto px-6">
+
+      <!-- Heading -->
+      <div class="text-center mb-14">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          Our Achievements in Numbers
+        </h2>
+        <p class="text-gray-400 text-lg">
+          15+ years of unmatched results and a flawless track record
+        </p>
+      </div>
+
+      <!-- Top Stats -->
+      <div class="grid md:grid-cols-4 gap-5 text-center mb-8">
+
+        <!-- Stat 1 -->
+        <div class="relative">
+          <i class="fas fa-thumbs-up text-orange-400 text-3xl mb-1"></i>
+          <h3 class="text-3xl font-bold">15 Years</h3>
+          <p class="text-gray-400 mt-1">Market Experience</p>
         </div>
 
-        <!-- TITLE -->
-        <p class="text-gray-300 mt-1">{{ item.title }}</p>
+        <!-- Stat 2 -->
+        <div class="relative">
+          <i class="fas fa-users text-orange-400 text-3xl mb-1"></i>
+          <h3 class="text-3xl font-bold">20,000+</h3>
+          <p class="text-gray-400 mt-1">Site Visits Conducted</p>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="relative">
+
+          <!-- Rupee Coin SVG -->
+          <div class="flex justify-center mb-2">  
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64"  class="w-10 h-10">
+              <defs>
+                <radialGradient id="coinGradient" cx="30%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#facc15"/>
+                  <stop offset="100%" stop-color="#b45309"/>
+                </radialGradient>
+              </defs>
+              <!-- Coin Circle -->
+              <circle cx="32" cy="32" r="30" fill="url(#coinGradient)" />
+              <!-- Rupee Symbol -->
+              <text x="50%" y="55%" text-anchor="middle" font-size="28" font-weight="bold" fill="white font-family="Arial">
+                ₹
+              </text>
+            </svg>
+          </div>
+
+          <h3 class="text-3xl font-bold">3,000+</h3>
+          <p class="text-gray-400 mt-1">Homes Booked</p>
+
+        </div>
+
+
+        <!-- Stat 4 -->
+        <div class="relative">
+          <i class="fas fa-smile text-orange-400 text-3xl mb-1"></i>
+          <h3 class="text-3xl font-bold">8,000+</h3>
+          <p class="text-gray-400 mt-1">Happy Faces</p>
+          <p class="text-gray-400">15+ years of Experience</p>
+        </div>
 
       </div>
 
-      {% endfor %}
+        <!-- Bottom Highlight Card -->
+      <div class="relative max-w-4xl mx-auto mt-10 px-4">
+        <div class="flex flex-col md:flex-row items-center md:items-center text-center md:text-lef gap-6 md:gap- backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl px-6 md:px-8 py-6 shadow-[0_0_40px_rgba(16,185,129,0.2)] hover:shadow-[0_0_60px_rgba(16,185,129,0.35)] transition duration-500">
+
+          <!-- Icon Box -->
+          <div class="bg-green-500/10 p-5 rounded-2xl border border-green-400/30 flex items-center justify-center shrink-0">
+
+            <!-- Fixed SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-12 h-12 md:w-14 md:h-14">
+
+              <defs>
+                <linearGradient id="greenGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#22c55e"/>
+                  <stop offset="100%" stop-color="#15803d"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Shield -->
+              <path d="M12 2L4 5V11C4 16 7.5 19.5 12 22C16.5 19.5 20 16 20 11V5L12 2Z" fill="url(#greenGradient)"
+              />
+
+              <!-- Check -->
+              <path d="M9.5 12.5L11.5 14.5L15 10.5" stroke="white" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round fill="none  />
+
+            </svg>
+
+          </div>
+
+          <!-- Content -->
+          <div>
+            <h3 class="text-2xl md:text-4xl font-bold text-green-400 leading-tight">
+              100% Flawless Record
+            </h3>
+
+            <div class="flex flex-col sm:flex-row items-center md:items-star justify-center md:justify-star gap-3 sm:gap-6 mt-4 text-gray-300 text-sm md:text-base">
+
+              <span class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-green-400"></i>
+                Zero Discrepancy
+              </span>
+
+              <span class="flex items-center gap-2">
+                <i class="fas fa-check-circle text-green-400"></i>
+                No Project Litigation
+              </span>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
 
     </div>
   </section>
-  <!-- STATS COUNTER END -->
 
 
   <!-- 🏦 HOME LOAN PARTNERS SLIDER -->
