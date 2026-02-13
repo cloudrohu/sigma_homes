@@ -70,47 +70,57 @@
 </div>
 
 <div class="md:hidden">
-   <section class="relative flex flex-col items-center text-center text-white h-[500px] pt-44 bg-cover bg-center bg-no-repeat overflow-hidden">
+  <section class="relative min-h-[420px] flex flex-col items-center justify-center text-center text-white overflow-hidden">
 
-      <!-- ✅ Optimized Image (not CSS bg) -->
-    <img src="{% if settings_obj.search_bg_mobile %}{{ settings_obj.search_bg_mobile.url }}{% else %}{{ settings_obj.search_bg.url }}{% endif %}" loading="eager"  fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" alt="Real estate background">
+    <img src="{% if settings_obj.search_bg_mobile %}{{ settings_obj.search_bg_mobile.url }}{% else %}{{ settings_obj.search_bg.url }}{% endif %}" alt="Real estate background" loading="eager" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover object-center" >
 
-    <!-- Dark overlay (cheap + improves text clarity) -->
-    <div class="absolute inset-0 bg-black/25"></div>
+    <div class="absolute inset-0 bg-black/20"></div>
 
-    <!-- CONTENT -->
-    <div class="relative z-10 w-full px-4">
+    <div class="relative z-10 w-full px-6 py-20">
 
-      <h2 class="text-2xl font-bold mb-2">Find Your Dream Property</h2>
-      <p class="text-gray-300 mb-5 text-sm">
-        Start Your Journey with Us! 
+      <h2 class="text-2xl font-bold mb-2">
+        Find Your Dream Property
+      </h2>
+
+      <p class="text-gray-200 text-sm mb-6">
+        Start Your Journey with Us!
       </p>
 
-
       <!-- Search -->
-      <div class="flex items-center bg-white/80 mt-5 rounded-full px-4 py-2 text-gray-700 shadow-md max-w-lg mx-auto">
+      <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-lg max-w-md mx-auto">
 
-        <select id="propertyTypeSelect" class="text-sm text-gray-600 bg-transparent outline-none cursor-pointer">
+        <select id="propertyTypeSelect" class="bg-transparent text-sm text-gray-600 outline-none cursor-pointer" >
           <option value="residential">Residential</option>
           <option value="commercial">Commercial</option>
         </select>
 
-        <div class="h-5 w-px bg-gray-300 mx-2"></div>
+        <div class="h-5 w-px bg-gray-300 mx-3"></div>
 
-        <div class="relative flex-grow">
-          <input id="mobileSearchInput" class="w-full bg-transparent outline-none text-sm" placeholder="Select City" autocomplete="off">
-
-          <ul id="mobileSuggestionBox" class="absolute left-0 right-0 mt-1 bg-white rounded-md shadow-lg hidden max-h-60 overflow-y-auto z-50"></ul>
+        <div class="relative flex-1">
+          <input 
+            id="mobileSearchInput"
+            type="text"
+            placeholder="Select City"
+            autocomplete="off"
+            class="w-full text-sm outline-none text-gray-700"
+          >
+          <ul 
+            id="mobileSuggestionBox"
+            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-xl hidden max-h-60 overflow-y-auto z-50">
+          </ul>
         </div>
 
-        <button id="mobileSearchButton" class="ml-2">
-          <i class="fas fa-search text-gray-700"></i>
+        <button id="mobileSearchButton" class="ml-3 text-gray-700">
+          <i class="fas fa-search"></i>
         </button>
 
       </div>
+
     </div>
+
   </section>
 </div>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
