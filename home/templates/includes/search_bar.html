@@ -76,194 +76,186 @@
 
     <div class="absolute inset-0 bg-black/20"></div>
 
-    <div class="relative z-10 w-full px-6 py-20">
+      <div class="relative z-10 w-full px-6 py-20">
 
-      <h2 class="text-2xl font-bold mb-2">
-        Find Your Dream Property
-      </h2>
+        <h2 class="text-2xl font-bold mb-2">
+          Find Your Dream Property
+        </h2>
 
-      <p class="text-gray-200 text-sm mb-6">
-        Start Your Journey with Us!
-      </p>
+        <p class="text-gray-200 text-sm mb-6">
+          Start Your Journey with Us!
+        </p>
 
-      <!-- Search -->
-      <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-lg max-w-md mx-auto">
+        <!-- Search -->
+        <div class="flex items-center bg-white rounded-lg px-4 py-2 shadow-lg max-w-md mx-auto">
 
-        <select id="propertyTypeSelect" class="bg-transparent text-sm text-gray-600 outline-none cursor-pointer" >
-          <option value="residential">Residential</option>
-          <option value="commercial">Commercial</option>
-        </select>
+          <select id="propertyTypeSelect" class="bg-transparent text-sm text-gray-600 outline-none cursor-pointer" >
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+          </select>
 
-        <div class="h-5 w-px bg-gray-300 mx-3"></div>
+          <div class="h-5 w-px bg-gray-300 mx-3"></div>
 
-        <div class="relative flex-1">
-          <input 
-            id="mobileSearchInput"
-            type="text"
-            placeholder="Select City"
-            autocomplete="off"
-            class="w-full text-sm outline-none text-gray-700"
-          >
-          <ul 
-            id="mobileSuggestionBox"
-            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-xl hidden max-h-60 overflow-y-auto z-50">
-          </ul>
+          <div class="relative flex-1">
+            <input id="mobileSearchInput" type="text" placeholder="Search Locality, Projects" autocomplete="off" class="w-full text-sm outline-none text-gray-700" >
+            <ul id="mobileSuggestionBox" class="absolute left-0 right-0 mt-2 bg-white shadow-xl hidden max-h-60 overflow-y-auto z-50">
+            </ul>
+          </div>
+
+          <button id="mobileSearchButton" class="ml-3 text-gray-700">
+            <i class="fas fa-search"></i>
+          </button>
+
         </div>
 
-        <button id="mobileSearchButton" class="ml-3 text-gray-700">
-          <i class="fas fa-search"></i>
-        </button>
-
       </div>
-
-    </div>
 
   </section>
 </div>
 
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
 
-  /* ==============================
-     ⚡ Debounce Utility
-  ============================== */
-  function debounce(fn, delay = 350) {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => fn(...args), delay);
-    };
-  }
-
-  /* ==============================
-     📦 City Fetch Logic (Shared)
-  ============================== */
-  async function fetchCities(query, box, inputEl) {
-    if (query.length < 3) {
-      box.classList.add("hidden");
-      return;
+    /* ==============================
+      ⚡ Debounce Utility
+    ============================== */
+    function debounce(fn, delay = 350) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), delay);
+      };
     }
 
-    try {
-      const res = await fetch(`/api/cities/?q=${encodeURIComponent(query)}`);
-      if (!res.ok) throw new Error("Network");
-
-      const results = await res.json();
-      box.innerHTML = "";
-
-      if (!results.length) {
-        box.innerHTML = `<li class="px-4 py-2 text-sm text-gray-500">No results found</li>`;
-        box.classList.remove("hidden");
+    /* ==============================
+      📦 City Fetch Logic (Shared)
+    ============================== */
+    async function fetchCities(query, box, inputEl) {
+      if (query.length < 3) {
+        box.classList.add("hidden");
         return;
       }
 
-      results.forEach(item => {
-        const li = document.createElement("li");
-        li.className = "px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex justify-between";
-        li.innerHTML = `<span>${item.name}</span><span class="text-xs text-gray-400">${item.type}</span>`;
+      try {
+        const res = await fetch(`/api/cities/?q=${encodeURIComponent(query)}`);
+        if (!res.ok) throw new Error("Network");
 
-        li.onclick = () => {
-          inputEl.value = item.name;
-          box.classList.add("hidden");
-        };
+        const results = await res.json();
+        box.innerHTML = "";
 
-        box.appendChild(li);
-      });
+        if (!results.length) {
+          box.innerHTML = `<li class="px-4 py-2 text-sm text-gray-500">No results found</li>`;
+          box.classList.remove("hidden");
+          return;
+        }
 
-      box.classList.remove("hidden");
+        results.forEach(item => {
+          const li = document.createElement("li");
+          li.className = "px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm flex justify-between";
+          li.innerHTML = `<span>${item.name}</span><span class="text-xs text-gray-400">${item.type}</span>`;
 
-    } catch (err) {
-      box.innerHTML = `<li class="px-4 py-2 text-sm text-red-500">Error loading</li>`;
-      box.classList.remove("hidden");
+          li.onclick = () => {
+            inputEl.value = item.name;
+            box.classList.add("hidden");
+          };
+
+          box.appendChild(li);
+        });
+
+        box.classList.remove("hidden");
+
+      } catch (err) {
+        box.innerHTML = `<li class="px-4 py-2 text-sm text-red-500">Error loading</li>`;
+        box.classList.remove("hidden");
+      }
     }
-  }
 
-  /* ==============================
-     🖥 Desktop Elements
-  ============================== */
-  const desktopInput = document.getElementById("searchInput");
-  const desktopBox   = document.getElementById("suggestionBox");
-  const desktopType  = document.getElementById("propertyType");
-  const desktopBtn   = document.getElementById("searchButton");
+    /* ==============================
+      🖥 Desktop Elements
+    ============================== */
+    const desktopInput = document.getElementById("searchInput");
+    const desktopBox   = document.getElementById("suggestionBox");
+    const desktopType  = document.getElementById("propertyType");
+    const desktopBtn   = document.getElementById("searchButton");
 
-  /* ==============================
-     📱 Mobile Elements
-  ============================== */
-  const mobileInput = document.getElementById("mobileSearchInput");
-  const mobileBox   = document.getElementById("mobileSuggestionBox");
-  const mobileType  = document.getElementById("propertyTypeSelect");
-  const mobileBtn   = document.getElementById("mobileSearchButton");
+    /* ==============================
+      📱 Mobile Elements
+    ============================== */
+    const mobileInput = document.getElementById("mobileSearchInput");
+    const mobileBox   = document.getElementById("mobileSuggestionBox");
+    const mobileType  = document.getElementById("propertyTypeSelect");
+    const mobileBtn   = document.getElementById("mobileSearchButton");
 
-  /* ==============================
-     ⚡ Debounced Functions
-  ============================== */
-  const desktopSearch = debounce(q => fetchCities(q, desktopBox, desktopInput));
-  const mobileSearch  = debounce(q => fetchCities(q, mobileBox, mobileInput));
+    /* ==============================
+      ⚡ Debounced Functions
+    ============================== */
+    const desktopSearch = debounce(q => fetchCities(q, desktopBox, desktopInput));
+    const mobileSearch  = debounce(q => fetchCities(q, mobileBox, mobileInput));
 
-  if (desktopInput)
-    desktopInput.addEventListener("input", e => desktopSearch(e.target.value));
+    if (desktopInput)
+      desktopInput.addEventListener("input", e => desktopSearch(e.target.value));
 
-  if (mobileInput)
-    mobileInput.addEventListener("input", e => mobileSearch(e.target.value));
+    if (mobileInput)
+      mobileInput.addEventListener("input", e => mobileSearch(e.target.value));
 
-  /* ==============================
-     🚪 Hide dropdown on click outside
-  ============================== */
-  document.addEventListener("click", e => {
-    if (!e.target.closest("#searchInput")) desktopBox?.classList.add("hidden");
-    if (!e.target.closest("#mobileSearchInput")) mobileBox?.classList.add("hidden");
-  });
+    /* ==============================
+      🚪 Hide dropdown on click outside
+    ============================== */
+    document.addEventListener("click", e => {
+      if (!e.target.closest("#searchInput")) desktopBox?.classList.add("hidden");
+      if (!e.target.closest("#mobileSearchInput")) mobileBox?.classList.add("hidden");
+    });
 
-  /* ==============================
-     🔎 Search redirect (shared)
-  ============================== */
-  function redirect(city, type) {
-    if (city.length < 2) {
-      alert("Please select a valid city");
-      return;
+    /* ==============================
+      🔎 Search redirect (shared)
+    ============================== */
+    function redirect(city, type) {
+      if (city.length < 2) {
+        alert("Please select a valid city");
+        return;
+      }
+      window.location.href = `/projects/search/?q=${encodeURIComponent(city)}&type=${encodeURIComponent(type)}`;
     }
-    window.location.href = `/projects/search/?q=${encodeURIComponent(city)}&type=${encodeURIComponent(type)}`;
-  }
 
-  desktopBtn?.addEventListener("click", () =>
-    redirect(desktopInput.value.trim(), desktopType.value.toLowerCase())
-  );
+    desktopBtn?.addEventListener("click", () =>
+      redirect(desktopInput.value.trim(), desktopType.value.toLowerCase())
+    );
 
-  mobileBtn?.addEventListener("click", () =>
-    redirect(mobileInput.value.trim(), mobileType.value.toLowerCase())
-  );
+    mobileBtn?.addEventListener("click", () =>
+      redirect(mobileInput.value.trim(), mobileType.value.toLowerCase())
+    );
 
-  /* ==============================
-     📑 Tabs Logic (Mobile + Desktop clean)
-  ============================== */
-  const tabOptions = {
-    buy: ["Residential", "Commercial"],
-    rental: ["Residential", "Commercial Lease", "PG / Co-living"],
-    projects: ["Residential", "Commercial"]
-  };
+    /* ==============================
+      📑 Tabs Logic (Mobile + Desktop clean)
+    ============================== */
+    const tabOptions = {
+      buy: ["Residential", "Commercial"],
+      rental: ["Residential", "Commercial Lease", "PG / Co-living"],
+      projects: ["Residential", "Commercial"]
+    };
 
-  document.querySelectorAll(".tab-btn").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(t => t.classList.remove("bg-white","text-black","font-semibold"));
+    document.querySelectorAll(".tab-btn").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(t => t.classList.remove("bg-white","text-black","font-semibold"));
 
-      tab.classList.add("bg-white","text-black","font-semibold");
+        tab.classList.add("bg-white","text-black","font-semibold");
 
-      const selected = tab.dataset.tab;
-      const targetSelect = tab.closest("#mobileTabs") ? mobileType : desktopType;
+        const selected = tab.dataset.tab;
+        const targetSelect = tab.closest("#mobileTabs") ? mobileType : desktopType;
 
-      if (!tabOptions[selected] || !targetSelect) return;
+        if (!tabOptions[selected] || !targetSelect) return;
 
-      targetSelect.innerHTML = "";
+        targetSelect.innerHTML = "";
 
-      tabOptions[selected].forEach(opt => {
-        const o = document.createElement("option");
-        o.textContent = opt;
-        o.value = opt.toLowerCase().replace(/\s+/g,"-");
-        targetSelect.appendChild(o);
+        tabOptions[selected].forEach(opt => {
+          const o = document.createElement("option");
+          o.textContent = opt;
+          o.value = opt.toLowerCase().replace(/\s+/g,"-");
+          targetSelect.appendChild(o);
+        });
       });
     });
-  });
 
-});
+  });
 </script>
