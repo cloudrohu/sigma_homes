@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.utils.text import slugify
 from django.utils import timezone
+from django_ckeditor_5.fields import CKEditor5Field
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -118,7 +119,7 @@ class Blog(models.Model):
     published_date = models.DateField(null=True, blank=True)
     featured_image = models.ImageField(upload_to="blogs/featured/", null=True, blank=True)
     short_description = models.TextField(help_text="1–2 lines short summary")
-    content = models.TextField(help_text="Full blog content")
+    content = CKEditor5Field(help_text="Full blog content",blank=True)
     is_published = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
 
