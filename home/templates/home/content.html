@@ -26,9 +26,49 @@
       stroke-dashoffset: 0;
     }
   }
+  /* Modal Background */
+.custom-modal {
+    border: none;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+
+/* Gradient Header */
+.custom-header {
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+    padding: 20px;
+}
+
+/* Inputs */
+.custom-input {
+    padding: 12px 15px;
+    border: 1px solid #eee;
+    transition: 0.3s ease;
+    box-shadow: none;
+}
+
+.custom-input:focus {
+    border-color: #ff9800;
+    box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.15);
+}
+
+/* Button */
+.custom-btn {
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+    border: none;
+    padding: 12px;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.custom-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 87, 34, 0.3);
+}
+
 </style>  
 
-<!-- FEATURE PROJECTS -->
+<!-- ======================= FEATURE PROJECTS ======================= -->
   <section class="bg-[#f8fafc] py-16 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4">
 
@@ -276,9 +316,9 @@
     });
   </script>
 
-<!-- FEATURE PROJECTS -->
+<!-- ======================= FEATURE PROJECTS ======================= -->
 
-<!-- NEW LAUNCH PROJECTS -->
+<!-- ======================= NEW LAUNCH PROJECTS ======================= -->
   <section class="py-12" data-aos="fade-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
@@ -439,7 +479,7 @@
 
     </div>
   </section>
-<!-- NEW LAUNCH PROJECTS END-->
+<!-- ======================= NEW LAUNCH PROJECTS END ======================= -->
 
 
 <!-- ======================= POSSESSION STATUS (UNIQUE) ======================= -->
@@ -626,11 +666,11 @@
   </section>
 <!-- ======================= WHAT ARE YOU LOOKING FOR? ======================= -->
 
-<!-- 🌟 WHY CHOOSE US -->
+<!-- ======================= 🌟 WHY CHOOSE US ======================= -->
   <section class="hidden md:block py-12 bg-white border" id="why-choose">
     <div class="max-w-7xl mx-auto px-4 md:px-4 grid md:grid-cols-2 gap-8 items-center">
 
-      <div data-aos="fade-left">
+      <div data-aos="fade-left Right" class="relative p-6 rounded-lg border p-8">
 
         <h2 class="text-2xl md:text-3xl font-extrabold text-uppercase text-orange-600 mb-4 text-center md:text-left">
           Why Choose Us
@@ -786,7 +826,7 @@
 
     </div>
   </section>
-<!-- 🌟 WHY CHOOSE US END -->
+<!-- ======================= 🌟 WHY CHOOSE US END ======================= -->
 
 <!-- ===================== How We Work ======================= -->
   <section class="w-full py-12 text-white bg-cover bg-center relative" style="background-image: url('https://sigmahomes.co.in/media/about/Prithvi_Pride.jpg');">
@@ -908,7 +948,7 @@
   </section>
 <!-- ===================== How We Work End======================= -->
 
-<!-- Blog Section Start -->
+<!-- ======================= Blog Section Start ======================= -->
   <section id="blog" class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4">
 
@@ -993,11 +1033,10 @@
 
     </div>
   </section>
-<!-- Blog Section End -->
+<!-- ======================= Blog Section End ======================= -->
 
   <br>
-
-<!-- Achievements Section -->
+<!-- ======================= Achievements Section ======================= -->
   <section class="relative py-8 text-white overflow-hidden bg-[#0b1220] md:hidden">
 
     <!-- Background Image -->
@@ -1128,9 +1167,9 @@
 
     </div>
   </section>
-<!-- Achievements Section End-->
+<!-- ======================= Achievements Section End ======================= -->
 
-<!-- 🏦 HOME LOAN PARTNERS SLIDER -->
+<!-- ======================= HOME LOAN PARTNERS SLIDER ======================= -->
   <section class="py-20 bg-white" id="home-loan-partners">
     <div class="max-w-7xl mx-auto px-6 text-center">
 
@@ -1190,10 +1229,9 @@
 
     </div>
   </section>
-<!--HOME LOAN PARTNERS SLIDER END -->
+<!-- ======================= HOME LOAN PARTNERS SLIDER END ======================= -->
 
-
-<!-- 🏢 FEATURED DEVELOPERS -->
+<!-- ======================= 🏢 FEATURED DEVELOPERS ======================= -->
   <div class="developer-section">
     <h2 class="section-title">Top Developers Projects</h2>
 
@@ -1218,11 +1256,9 @@
 
     </div>
   </div>
-<!-- FEATURED DEVELOPERS END -->
+<!-- ======================= FEATURED DEVELOPERS END ======================= -->
 
-
-
-<!-- LOCALITY START-->
+<!-- ======================= LOCALITY START ======================= -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-6">
 
@@ -1256,133 +1292,205 @@
   </div>
 
   </section>
-<!-- LOCALITY END -->
+<!-- ======================= LOCALITY END ======================= -->
 
 
-<!-- LEFT DETAILS + RIGHT FORM CONTACT SECTION -->
-  <section id="contact" class="py-14 bg-orange-50">
-      <h2 class="text-3xl font-bold text-orange-600 mb-4 text-center">Get In Touch</h2>
-        <p class="text-gray-600 mb-6 text-center">We are here to assist you with any queries.</p>
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+<!-- ============= CONTACT SECTION ============= -->
+<section id="contact" class="relative py-10 bg-gradient-to-b from-orange-50 to-white">
 
-      <!-- LEFT SIDE DETAILS -->
-      <div class="mt-6 rounded-lg overflow-hidden shadow-md border border-gray-100">
-          {% if contact_content and contact_content.map_iframe %}
-            {{ contact_content.map_iframe|safe }}
-          {% elif settings_obj and settings_obj.google_map %}
-            {{ settings_obj.google_map|safe }}
-          {% else %}
-            <div class="p-6 text-center text-sm text-gray-500">Map not available.</div>
-          {% endif %}
+  <!-- Heading -->
+  <div class="text-center mb-3">
+    <h2 class="text-3xl md:text-4xl font-semibold text-[#B8925A] tracking-wide">
+      Get In Touch
+    </h2>
+    <div class="w-12 h-[2px] bg-[#B8925A] mx-auto my-3 rounded-full"></div>
+    <p class="text-gray-500 text-sm max-w-lg mx-auto">
+      We are here to assist you with any queries.
+    </p>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-2 gap-8 items-stretch">
+
+    <!-- LEFT SIDE MAP -->
+    <div class="overflow-hidden shadow-md border border-gray-100 min-h-[370px]">
+
+      {% if contact_content and contact_content.map_iframe %}
+        {{ contact_content.map_iframe|safe }}
+      {% elif settings_obj and settings_obj.google_map %}
+        {{ settings_obj.google_map|safe }}
+      {% else %}
+        <div class="flex items-center justify-center h-full text-sm text-gray-400">
+          Map not available.
+        </div>
+      {% endif %}
+
+    </div>
+
+   <!-- RIGHT SIDE FORM -->
+  <div class="bg-white p-6 md:p-5 shadow-md border border-orange-100">
+
+    <h3 class="text-lg font-medium text-[#B8925A] mb-1 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#B8925A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+          d="M3 8l9 6 9-6M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z"/>
+      </svg>
+      Send Us a Message
+    </h3>
+
+    <form action="{% url 'contact' %}" method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- Name -->
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i class="fa fa-user"></i>
+            </span>
+            <input type="text" name="name" required
+                placeholder="Your Name"
+                class="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-[#B8925A] focus:border-[#B8925A] outline-none transition">
         </div>
 
-      <!-- RIGHT SIDE FORM -->
-      <div class="bg-white p-8 rounded-xl shadow-md border border-orange-100">
+        <!-- Phone -->
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i class="fa fa-phone"></i>
+            </span>
+            <input type="tel" name="phone" required
+                placeholder="Your Phone Number"
+                class="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-[#B8925A] focus:border-[#B8925A] outline-none transition">
+        </div>
 
-        <h3 class="text-xl font-semibold text-orange-600 mb-5">Send Us a Message</h3>
+        <!-- Email -->
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <i class="fa fa-envelope"></i>
+            </span>
+            <input type="email" name="email" required
+                placeholder="Your Email"
+                class="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-[#B8925A] focus:border-[#B8925A] outline-none transition">
+        </div>
 
-        <form class="space-y-4">
+        <!-- Message -->
+        <div class="relative">
+            <textarea rows="2" name="message"
+                placeholder="Your Message"
+                class="w-full pl-4 pr-4 py-2.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-[#B8925A] focus:border-[#B8925A] outline-none transition resize-none"></textarea>
+        </div>
 
-          <input type="text" placeholder="Your Name"
-                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none">
-
-          <input type="email" placeholder="Your Email"
-                class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none">
-
-          <textarea rows="4" placeholder="Your Message"
-                    class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-400 outline-none"></textarea>
-
-          <button class="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition">
+        <!-- Button -->
+        <button type="submit"
+            class="w-full bg-[#B8925A] text-white py-2 rounded-md text-sm font-medium hover:bg-[#a27f49] transition duration-300 mt-3">
             Send Message
+        </button>
+
+    </form>
+
+
+  </div>
+
+  </div>
+
+</section>
+<!-- ============= CONTACT SECTION END ============= -->
+
+
+<!-- ============= FAQ ============= -->
+<section class="py-20 bg-gray-100" id="faq">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <h2 class="text-4xl font-bold text-[#B8925A] mb-12 text-center">
+      Frequently Asked Questions
+    </h2>
+
+    <!-- FAQ Grid -->
+    <div id="faqContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+
+    <!-- Buttons -->
+    <div class="text-center mt-10 space-x-4">
+      <button id="loadMoreBtn" class="px-6 py-3 bg-[#B8925A] text-white rounded-lg font-semibold hover:bg-[#B8925A] transition">
+        Load More
+      </button>
+
+      <button id="showLessBtn" class="px-3 py-2 bg-gray-400 text-white rounded-lg font-semibold hover:bg-gray-500 transition hidden">
+        Show Less   
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<div id="faqData" class="hidden"> 
+  {% for faq in faqs %}
+  <div class="faq-item">
+    <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
+
+      <details class="group cursor-pointer">
+        <summary class="flex justify-between items-center font-semibold text-lg text-gray-900">
+          {{ faq.question }}
+          <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300 group-open:rotate-180"></i>
+        </summary>
+
+        <p class="mt-4 text-gray-700 leading-7">
+          {{ faq.answer|safe }}
+        </p>
+      </details>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- ============= FAQ END ============= -->
+
+<!-- ============= COMMON POPUP ============= -->
+<div class="modal fade" id="commonModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content custom-modal">
+
+      <!-- HEADER -->
+      <div class="modal-header border-0 custom-header">
+        <h5 class="modal-title fw-bold text-white">
+          Let’s Connect
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- BODY -->
+      <div class="modal-body p-4">
+
+        <form id="contactForm" action="{% url 'contact' %}" method="POST">
+
+          {% csrf_token %}
+
+          <div class="mb-3">
+              <input type="text" name="name" class="form-control custom-input" placeholder="Full Name" required>
+          </div>
+
+          <div class="mb-3">
+              <input type="tel" name="phone" class="form-control custom-input" placeholder="Mobile Number" required>
+          </div>
+
+          <div class="mb-3">
+              <input type="email" name="email" class="form-control custom-input" placeholder="Email Address" required>
+          </div>
+
+          <div class="mb-3">
+              <textarea name="message" class="form-control custom-input" rows="3" placeholder="Your Message"></textarea>
+          </div>
+
+          <button type="submit" class="btn custom-btn w-100 fw-semibold">
+              Submit Now
           </button>
 
         </form>
 
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ❓ FAQ -->
-  <section class="py-20 bg-gray-100" id="faq">
-    <div class="max-w-7xl mx-auto px-6">
-
-      <h2 class="text-4xl font-bold text-orange-600 mb-12 text-center">
-        Frequently Asked Questions
-      </h2>
-
-      <!-- FAQ Grid -->
-      <div id="faqContainer" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-
-      <!-- Buttons -->
-      <div class="text-center mt-10 space-x-4">
-        <button id="loadMoreBtn"
-          class="px-6 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition">
-          Load More
-        </button>
-
-        <button id="showLessBtn"
-          class="px-3 py-2 bg-gray-400 text-white rounded-lg font-semibold hover:bg-gray-500 transition hidden">
-          Show Less   
-        </button>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Hidden FAQ Data -->
-  <div id="faqData" class="hidden">
-    {% for faq in faqs %}
-    <div class="faq-item">
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
-
-        <details class="group cursor-pointer">
-          <summary class="flex justify-between items-center font-semibold text-lg text-gray-900">
-            {{ faq.question }}
-            <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300 group-open:rotate-180"></i>
-          </summary>
-
-          <p class="mt-4 text-gray-700 leading-7">
-            {{ faq.answer|safe }}
-          </p>
-        </details>
 
       </div>
-    </div>
-    {% endfor %}
-  </div>
-  <!-- Hidden FAQ Data -->
 
-  <!-- POPUS START -->
-  <div class="modal fade" id="commonModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content rounded-xl">
-
-        <div class="modal-header">
-          <h5 class="modal-title text-lg font-semibold" id="modalTitle">
-            Get In Touch
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-
-        <div class="modal-body">
-          <form class="space-y-3">
-            <input type="text" placeholder="Your Name" class="w-full border px-3 py-2 rounded">
-            <input type="tel" placeholder="Phone Number" class="w-full border px-3 py-2 rounded">
-            <textarea rows="3" placeholder="Message" class="w-full border px-3 py-2 rounded"></textarea>
-
-            <button class="w-full bg-orange-500 text-white py-2 rounded">
-              Submit
-            </button>
-          </form>
-        </div>
-
-      </div>
     </div>
   </div>
-  <!-- POPUS END -->
-
-<!-- LEFT DETAILS + RIGHT FORM CONTACT SECTION END-->
+</div>
+<!-- ============= COMMON POPUP END============= -->
 
 <script defer>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1559,6 +1667,17 @@ setInterval(() => {
     container.scrollLeft = 0;
   }
 }, 2500); 
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("commonModal");
+  const modalTitle = modal.querySelector(".modal-title");
+
+  document.querySelectorAll("[data-bs-toggle='modal']").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const title = this.getAttribute("data-modal-title");
+      modalTitle.textContent = title;
+    });
+  });
+});
 </script>
 
 <style>

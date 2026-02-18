@@ -173,11 +173,13 @@ def contact_view(request):
         )
 
         messages.success(request, "Your message has been sent successfully!")
-        return redirect("contact")  
+        
+        return redirect("thank-you")   # ✅ Changed Here
 
-    footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
+    footerlink = FooterLink.objects.filter(
+        is_active=True, parent__isnull=True
+    ).prefetch_related("children").order_by("order")
 
-    
     context = {
         "settings_obj": settings_obj,
         "contact_content": contact_content,
@@ -275,4 +277,8 @@ def calculator(request):
         
     }
     return render(request, 'home/calculator.html', context)
+
+def thank_you(request):
+
+    return render(request, 'home/thank-you.html')
 
