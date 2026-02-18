@@ -1405,67 +1405,71 @@
     <!-- ================= RELATED PROJECTS ================= -->
 
     <!-- ================= CONTACT POPUP ================= -->
-    <div id="contactPopup" class="fixed inset-0 bg-black/70 hidden z-[9999] flex items-center justify-center px-3">
-        <div class="relative w-full max-w-sm shadow-2xl bg-white overflow-hidden">
+    <div id="contactPopup" class="fixed inset-0 bg-black/60 hidden z-[9999] flex items-center justify-center px-3">
+
+        <div class="relative w-full max-w-md bg-white shadow-xl overflow-hidden">
 
             <!-- HEADER -->
-            <div class="relative bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-3 text-white">
-            <h3 class="text-sm font-semibold">Enquiry For</h3>
-
-                <p id="enquiryProjectName" class="text-xs opacity-90 mt-0.5">
-                    Project Name
+            <div class="px-4 py-3 border-b flex justify-between items-center">
+            <div>
+                <h3 class="text-base font-semibold text-gray-800">Enquiry</h3>
+                <p id="enquiryProjectName" class="text-xs text-gray-500 mt-0.5">
+                Project Name
                 </p>
+            </div>
 
-                <button id="closeContactPopup" type="button" class="absolute top-2 right-2 h-7 w-7 rounded-full flex items-center justify-center bg-white/20 hover:bg-white/30 text-white text-sm transition">
-                    ✕
-                </button>
+            <button id="closeContactPopup"
+                class="text-gray-400 hover:text-gray-600 text-lg font-light">
+                ✕
+            </button>
             </div>
 
             <!-- FORM -->
-            <form method="post" action="{% url 'submit_enquiry' project.id %}" id="enquiryForm" class="p-4 space-y-3 text-sm bg-white">
-                    {% csrf_token %}
+            <form method="post" action="{% url 'submit_enquiry' project.id %}" id="enquiryForm" class="px-4 py-4 space-y-3 text-sm">
 
-                    <!-- Honeypot -->
-                    <input type="text" name="company" class="hidden">
+            {% csrf_token %}
 
-                    <input type="hidden" name="project_id" id="projectIdInput">
+            <input type="hidden" name="project_id" id="projectIdInput">
+            <input type="text" name="company" class="hidden">
 
-                    <!-- NAME -->
-                    <div>
-                        <label class="font-medium text-gray-600">Full Name</label>
-                        <input type="text" name="name" required class="mt-1 w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none">
-                    </div>
+            <!-- FULL NAME -->
+            <input type="text" name="name" required placeholder="Full Name" class="w-full border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition">
 
-                    <!-- EMAIL -->
-                    <div>
-                        <label class="font-medium text-gray-600">Email</label>
-                        <input type="email" name="email" class="mt-1 w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none">
-                    </div>
+            <!-- PHONE -->
+            <input type="tel" name="phone" required placeholder="Phone" class="w-full border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition">
 
-                    <!-- PHONE -->
-                    <div>
-                        <label class="font-medium text-gray-600">Mobile</label>
-                        <input type="tel" name="phone" required class="mt-1 w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none">
-                    </div>
+            <!-- EMAIL -->
+            <input type="email" name="email" placeholder="Email" class="w-full border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition">
 
-                    <!-- MESSAGE -->
-                    <div>
-                        <label class="font-medium text-gray-600">Message</label>
-                        <textarea name="message" rows="2" class="mt-1 w-full border rounded-md px-3 py-2 focus:ring-2 focus:ring-orange-400 outline-none"></textarea>
-                    </div>
+            <!-- MESSAGE -->
+            <textarea name="message" rows="3" placeholder="Message" class="w-full border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition"></textarea>
 
-                    <!-- SUBMIT -->
-                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-lg font-semibold transition">
-                        Submit Enquiry
-                    </button>
+            <!-- CHECKBOX 1 -->
+            <div class="flex items-start gap-2 text-[11px] text-gray-600">
+                <input type="checkbox" required class="mt-1" checked>
+                <label>
+                I authorize Sigma Homes Advisory to send notifications. Via SMS/RCS/Email/Whatsapp
+                </label>
+            </div>
 
-                    <p class="text-[11px] text-center text-gray-400">
-                        🔒 100% Privacy Protected
-                    </p>
+            <!-- CHECKBOX 2 -->
+            <div class="flex items-start gap-2 text-[11px] text-gray-600">
+                <input type="checkbox" required class="mt-1" checked>
+                <label>
+                I agree to the Terms & Privacy Policy. And Terms of Conditions.
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="w-full bg-[#0f172a] text-white py-2.5 text-sm font-semibold tracking-wide hover:bg-[#1e293b] transition">
+                Submit
+            </button>
+
             </form>
 
         </div>
+
     </div>
+
 
     <!-- UNIT PLAN POPUP -->
     <div id="unitPlanPopup" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[9999] backdrop-blur-sm">
