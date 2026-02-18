@@ -1448,7 +1448,7 @@
             <div class="flex items-start gap-2 text-[11px] text-gray-600">
                 <input type="checkbox" required class="mt-1" checked>
                 <label>
-                I authorize Sigma Homes Advisory to send notifications. Via SMS/RCS/Email/Whatsapp
+                I authorize {{settings_obj.site_name}} to send notifications. Via SMS/RCS/Email/Whatsapp
                 </label>
             </div>
 
@@ -1456,7 +1456,7 @@
             <div class="flex items-start gap-2 text-[11px] text-gray-600">
                 <input type="checkbox" required class="mt-1" checked>
                 <label>
-                I agree to the Terms & Privacy Policy. And Terms of Conditions.
+                I agree to the Terms & <a href="{% url "privacy-policy" %}" class="text-blue-600 hover:underline">Privacy Policy</a> And <a href="{% url "terms_conditions" %}" class="text-blue-600 hover:underline">Terms of Conditions</a>.
             </div>
 
             <!-- SUBMIT BUTTON -->
