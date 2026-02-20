@@ -55,22 +55,23 @@
           <textarea name="message" rows="3" placeholder="Type your message..." required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
         </div>
 
-        
-        <!-- Checkbox 1 -->
-        <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight pt-1">
-          <input type="checkbox" required checked class="mt-1 w-4 h-4 accent-[#B8925A]">
-          <label>
-            I authorize notifications via SMS / Email / WhatsApp.
-          </label>
-        </div>
+        {% if settings_obj %}
 
-        <!-- Checkbox 2 -->
-        <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight">
-          <input type="checkbox" required checked class="mt-1 w-4 h-4 accent-[#B8925A]">
-          <label>
-            I agree to the Terms & Privacy Policy.
-          </label>
-        </div>
+            {% if settings_obj.consent_sms_text %}
+            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight pt-1">
+                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                <label>{{ settings_obj.consent_sms_text }}</label>
+            </div>
+            {% endif %}
+
+            {% if settings_obj.consent_terms_text %}
+            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight">
+                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                <label>{{ settings_obj.consent_terms_text|safe }}</label>
+            </div>
+            {% endif %}
+
+        {% endif %}
 
         <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-transform transform hover:scale-[1.02] duration-200">
           Send Message

@@ -94,6 +94,8 @@ class SettingAdmin(admin.ModelAdmin):
                 "rera_number",
                 "footer_text",
                 "copy_right",
+                "consent_sms_text",
+                "consent_terms_text",
                 "status",
             )
         }),

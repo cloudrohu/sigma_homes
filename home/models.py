@@ -22,6 +22,8 @@ class Setting(ImageCompressionMixin, models.Model):
     address = models.CharField(blank=True, max_length=100)
     phone = models.CharField(blank=True, max_length=15)
     whatsapp = models.CharField(blank=True, max_length=15)
+    consent_sms_text = models.TextField(blank=True, null=True)
+    consent_terms_text = CKEditor5Field(blank=True, null=True)
     email = models.CharField(blank=True, max_length=50)
     google_map = models.CharField(blank=True, max_length=1000)
     smtpserver = models.CharField(blank=True, max_length=50)
@@ -44,8 +46,6 @@ class Setting(ImageCompressionMixin, models.Model):
         ('False', 'False'),
     )
     
-    
-
     facebook = models.CharField(blank=True, max_length=50)
     instagram = models.CharField(blank=True, max_length=50)
     twitter = models.CharField(blank=True, max_length=50)

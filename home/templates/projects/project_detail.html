@@ -644,6 +644,24 @@
                             <input type="tel" name="phone" required placeholder="Mobile Number" class="w-full pl-11 pr-4 py-3 rounded-xl bg-white border border-gray-300 shadow-inner focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none text-sm text-gray-700">
                         </div>
 
+                        {% if settings_obj %}
+
+                            {% if settings_obj.consent_sms_text %}
+                            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight pt-1">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                                <label>{{ settings_obj.consent_sms_text }}</label>
+                            </div>
+                            {% endif %}
+
+                            {% if settings_obj.consent_terms_text %}
+                            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                                <label>{{ settings_obj.consent_terms_text|safe }}</label>
+                            </div>
+                            {% endif %}
+
+                        {% endif %}
+
                         <!-- CTA BUTTON -->
                         <button type="submit" class="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 py-3.5 font-semibold text-white text-sm shadow-md transition-all duration-300 hover:shadow-orange-500/40 hover:scale-[1.01]">
                             <span class="relative z-10 flex items-center justify-center gap-2">
@@ -1444,20 +1462,23 @@
             <!-- MESSAGE -->
             <textarea name="message" rows="3" placeholder="Message" class="w-full border border-gray-300 px-3 py-2.5 text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition"></textarea>
 
-            <!-- CHECKBOX 1 -->
-            <div class="flex items-start gap-2 text-[11px] text-gray-600">
-                <input type="checkbox" required class="mt-1" checked>
-                <label>
-                I authorize {{settings_obj.site_name}} to send notifications. Via SMS/RCS/Email/Whatsapp
-                </label>
-            </div>
+            {% if settings_obj %}
 
-            <!-- CHECKBOX 2 -->
-            <div class="flex items-start gap-2 text-[11px] text-gray-600">
-                <input type="checkbox" required class="mt-1" checked>
-                <label>
-                I agree to the Terms & <a href="{% url "privacy-policy" %}" class="text-blue-600 hover:underline">Privacy Policy</a> And <a href="{% url "terms_conditions" %}" class="text-blue-600 hover:underline">Terms of Conditions</a>.
-            </div>
+                {% if settings_obj.consent_sms_text %}
+                <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight pt-1">
+                    <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                    <label>{{ settings_obj.consent_sms_text }}</label>
+                </div>
+                {% endif %}
+
+                {% if settings_obj.consent_terms_text %}
+                <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight">
+                    <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                    <label>{{ settings_obj.consent_terms_text|safe }}</label>
+                </div>
+                {% endif %}
+
+            {% endif %}
 
             <!-- SUBMIT BUTTON -->
             <button type="submit" class="w-full bg-[#0f172a] text-white py-2.5 text-sm font-semibold tracking-wide hover:bg-[#1e293b] transition">

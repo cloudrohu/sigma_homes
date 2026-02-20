@@ -1377,6 +1377,25 @@
                 class="w-full pl-4 pr-4 py-2.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-[#B8925A] focus:border-[#B8925A] outline-none transition resize-none"></textarea>
         </div>
 
+        
+        {% if settings_obj %}
+
+            {% if settings_obj.consent_sms_text %}
+            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight pt-1">
+                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                <label>{{ settings_obj.consent_sms_text }}</label>
+            </div>
+            {% endif %}
+
+            {% if settings_obj.consent_terms_text %}
+            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight">
+                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                <label>{{ settings_obj.consent_terms_text|safe }}</label>
+            </div>
+            {% endif %}
+
+        {% endif %}
+
         <!-- Button -->
         <button type="submit"
             class="w-full bg-[#B8925A] text-white py-2 rounded-md text-sm font-medium hover:bg-[#a27f49] transition duration-300 mt-3">
@@ -1477,6 +1496,24 @@
           <div class="mb-3">
               <textarea name="message" class="form-control custom-input" rows="3" placeholder="Your Message"></textarea>
           </div>
+
+          {% if settings_obj %}
+
+            {% if settings_obj.consent_sms_text %}
+            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight pt-1">
+                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                <label>{{ settings_obj.consent_sms_text }}</label>
+            </div>
+            {% endif %}
+
+            {% if settings_obj.consent_terms_text %}
+            <div class="flex items-start gap-2 text-xs text-gray-500 leading-tight">
+                <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#B8925A]" checked>
+                <label>{{ settings_obj.consent_terms_text|safe }}</label>
+            </div>
+            {% endif %}
+
+        {% endif %}
 
           <button type="submit" class="btn custom-btn w-100 fw-semibold">
               Submit Now

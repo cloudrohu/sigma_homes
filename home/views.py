@@ -24,23 +24,15 @@ def index(request):
     cities = City.objects.filter(level_type="CITY").order_by("name")
 
     # ================= PROPERTY TYPES =================
-    residential_type = PropertyType.objects.filter(
-        name__iexact="Residential", is_top_level=True
-    ).first()
+    residential_type = PropertyType.objects.filter(name__iexact="Residential", is_top_level=True).first()
 
-    commercial_type = PropertyType.objects.filter(
-        name__iexact="Commercial", is_top_level=True
-    ).first()
+    commercial_type = PropertyType.objects.filter(name__iexact="Commercial", is_top_level=True).first()
 
     residential_types = residential_type.get_descendants(include_self=True) if residential_type else PropertyType.objects.none()
     commercial_types = commercial_type.get_descendants(include_self=True) if commercial_type else PropertyType.objects.none()
 
     # ================= NEW LAUNCH =================
-    new_launch_residential = Project.objects.filter(
-        active=True,
-        construction_status__iexact="New Launch",
-        propert_type__in=residential_types
-    ).order_by("-create_at")[:10]
+    new_launch_residential = Project.objects.filter(active=True,construction_status__iexact="New Launch",propert_type__in=residential_types).order_by("-create_at")[:10]
 
     new_launch_commercial = Project.objects.filter(
         active=True,
@@ -104,6 +96,7 @@ def index(request):
         "testimonials": testimonials,
         "faqs": faqs,
         "possession_counts": possession_counts,
+        
     })
 
 
