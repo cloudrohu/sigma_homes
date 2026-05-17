@@ -94,6 +94,7 @@ class SettingAdmin(admin.ModelAdmin):
                 "rera_number",
                 "footer_text",
                 "copy_right",
+                "googletagmanager",
                 "consent_sms_text",
                 "consent_terms_text",
                 "status",
@@ -110,10 +111,6 @@ class SettingAdmin(admin.ModelAdmin):
 
     logo_preview.short_description = "Logo Preview"
 
-
-# =============================
-# 🖼️ SLIDER ADMIN
-# =============================
 @admin.register(Slider)
 class SliderAdmin(admin.ModelAdmin):
     list_display = ("title", "order", "is_active")
@@ -128,10 +125,6 @@ class ContactEnquiryAdmin(admin.ModelAdmin):
     search_fields = ("name", "email", "phone")
     list_filter = ("created_at",) 
 
-
-# =============================
-# 👥 LEADERSHIP TEAM ADMIN
-# =============================
 @admin.register(Leadership)
 class LeadershipAdmin(admin.ModelAdmin):
     list_display = (
@@ -162,20 +155,12 @@ class LeadershipAdmin(admin.ModelAdmin):
         }),
     )
 
-
-# =============================
-# 💡 WHY CHOOSE ADMIN
-# =============================
 @admin.register(Why_Choose)
 class WhyChooseAdmin(admin.ModelAdmin):
     list_display = ("title", "order", "is_active")
     list_editable = ("order", "is_active")
     search_fields = ("title",)
 
-
-# =============================
-# ℹ️ ABOUT PAGE ADMIN
-# =============================
 @admin.register(About)
 class AboutAdmin(admin.ModelAdmin):
 
@@ -256,28 +241,16 @@ class AboutAdmin(admin.ModelAdmin):
         }),
     )
 
-
-# =============================
-# 📞 CONTACT PAGE ADMIN
-# =============================
 @admin.register(Contact_Page)
 class ContactPageAdmin(admin.ModelAdmin):
     list_display = ("heading", "phone", "email")
     search_fields = ("heading", "phone", "email")
 
-
-# =============================
-# 👨‍💼 OUR TEAM ADMIN
-# =============================
 @admin.register(Our_Team)
 class OurTeamAdmin(admin.ModelAdmin):
     list_display = ("name", "designation")
     search_fields = ("name", "designation")
 
-
-# =============================
-# 💬 TESTIMONIAL ADMIN
-# =============================
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
     list_display = ("name", "designation", "rating")
@@ -285,18 +258,11 @@ class TestimonialAdmin(admin.ModelAdmin):
     search_fields = ("name", "designation", "message")
 
 
-# =============================
-# ❓ FAQ ADMIN
-# =============================
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):
     list_display = ("question",)
     search_fields = ("question", "answer")
 
-
-# =============================
-# 📊 IMPACT METRICS ADMIN
-# =============================
 @admin.register(ImpactMetric)
 class ImpactMetricAdmin(admin.ModelAdmin):
     list_display = ("title", "value", "order", "created_on")

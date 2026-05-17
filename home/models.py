@@ -35,6 +35,7 @@ class Setting(ImageCompressionMixin, models.Model):
     meta_keywords = models.TextField(blank=True, null=True)
     footer_text = models.CharField(max_length=250, blank=True, null=True)
     copy_right = models.CharField(blank=True, max_length=100)
+    googletagmanager = models.CharField(blank=True, max_length=100)
     privacy_policy = CKEditor5Field(blank=True)
     terms_conditions = CKEditor5Field(blank=True)
     disclaimer = CKEditor5Field(blank=True)

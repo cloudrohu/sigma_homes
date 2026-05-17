@@ -5,6 +5,18 @@
 {% block content %}
 {% load static %}
 
+<style>
+    @keyframes popup{
+        from{
+            opacity:0;
+            transform:scale(.85) translateY(20px);
+        }
+        to{
+            opacity:1;
+            transform:scale(1) translateY(0);
+        }
+    }
+</style>
 
     <link rel="stylesheet" href="assets/css/projects_details.css">
     <script src="assets/js/projects_details.js"></script>
@@ -13,8 +25,9 @@
 
 
 <main>
+
     <!-- ================= PROJECT HEADER ================= -->
-    <section class="border-b bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+    <section class="border-b bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70"> 
         <div class="max-w-6xl mx-auto px-4 py-4 lg:py-6 sticky top-0 z-[999]">
 
             <!-- BREADCRUMB -->
@@ -99,21 +112,22 @@
                             <i class="fa-regular fa-heart text-sm"></i>
                         </button>
 
-                        <!-- share -->
-                        <button class="w-9 h-9 flex items-center justify-center border text-gray-600 hover:bg-gray-50">
-                            <i class="fa-solid fa-arrow-up-from-bracket text-sm"></i>
+                     
+                        <!-- Share Button -->
+                        <button id="shareBtn" class="w-9 h-9 flex items-center justify-center border text-gray-600 hover:bg-gray-50">                            
+                            <i class="fa-solid fa-share text-sm"></i>
                         </button>
 
-                        <!-- brochure -->
-                        <a href="#" class="inline-flex items-center gap-2 border px-4 h-9 text-sm text-gray-700 hover:bg-gray-50">
+
+                        <a href="javascript:void(0)" data-project="{{ project.project_name }}" data-project-id="{{ project.id }}" class="openContactPopup inline-flex items-center gap-2 border px-4 h-9 text-sm text-gray-700 hover:bg-gray-50">
                             <i class="fa-solid fa-download text-xs"></i>
                             Brochure
                         </a>
 
                         <!-- Contact Us -->
-                            <a href="javascript:void(0)" data-project="{{ project.project_name }}" data-project-id="{{ project.id }}" class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-orange-500 text-orange-600 text-sm font-semibold hover:bg-orange-50 transition">
-                                Contact Us
-                            </a>
+                        <a href="javascript:void(0)" data-project="{{ project.project_name }}" data-project-id="{{ project.id }}" class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-orange-500 text-orange-600 text-sm font-semibold hover:bg-orange-50 transition">
+                            Contact Us
+                        </a>
 
                     </div>
                 </div>
@@ -122,13 +136,9 @@
             <!-- MOBILE BUTTON BAR -->
             <div class="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg p-3 flex items-center gap-2 sm:hidden z-50">
 
-                <!-- Wishlist -->
-                <button class="w-10 h-10 flex items-center justify-center border text-gray-600">
-                    <i class="fa-regular fa-heart text-lg"></i>
-                </button>
-
                 <!-- Share -->
-                <button class="w-10 h-10 flex items-center justify-center border text-gray-600">
+                <button id="shareBtn"
+                    class="w-10 h-10 flex items-center justify-center border text-gray-600 hover:bg-blue-50 transition duration-300">
                     <i class="fa-solid fa-arrow-up-from-bracket text-lg"></i>
                 </button>
 
@@ -139,12 +149,7 @@
                 </a>
 
                 <!-- Contact Us -->
-                    <a href="javascript:void(0)"
-                        data-project="{{ project.project_name }}"
-                        data-project-id="{{ project.id }}"
-                        class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2
-                                px-4 py-2 border border-orange-500 text-orange-600
-                                text-sm font-semibold rounded-3xl hover:bg-orange-50 transition">
+                    <a href="javascript:void(0)" data-project="{{ project.project_name }}" data-project-id="{{ project.id }}" class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-orange-500 text-orange-600 text-sm font-semibold rounded-3xl hover:bg-orange-50 transition">
                         Contact Us
                     </a>
 
@@ -798,97 +803,97 @@
     </section>
 
     <script>
-    document.getElementById("videoPlayBtn").addEventListener("click", function () {
+        document.getElementById("videoPlayBtn").addEventListener("click", function () {
 
-        const iframe = document.getElementById("youtubeFrame");
-        const videoId = "{{ project.youtube_embed_id }}";
+            const iframe = document.getElementById("youtubeFrame");
+            const videoId = "{{ project.youtube_embed_id }}";
 
-        iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
-        iframe.classList.remove("hidden");
+            iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+            iframe.classList.remove("hidden");
 
-        document.getElementById("videoThumb").classList.add("hidden");
-        this.classList.add("hidden");
-    });
+            document.getElementById("videoThumb").classList.add("hidden");
+            this.classList.add("hidden");
+        });
     </script>
 
     <!-- ===================== AMENITIES SECTION ===================== -->
     <section class="max-w-7xl mx-auto p-4 scroll-mt-[130px]" id="amenities">
 
-    <!-- HEADER -->
-    <div class="bg-[#e8eff5] px-5 py-3 border rounded-t-lg">
-        <h2 class="text-xl font-semibold">Amenities</h2>
-    </div>
+        <!-- HEADER -->
+        <div class="bg-[#e8eff5] px-5 py-3 border rounded-t-lg">
+            <h2 class="text-xl font-semibold">Amenities</h2>
+        </div>
 
-    <!-- BODY -->
-    <div class="bg-white border border-t-0 rounded-b-lg p-6">
-        <h3 class="text-sm font-semibold text-gray-700 mb-4">External Amenities</h3>
+        <!-- BODY -->
+        <div class="bg-white border border-t-0 rounded-b-lg p-6">
+            <h3 class="text-sm font-semibold text-gray-700 mb-4">External Amenities</h3>
 
-        {% if project_amenities %}
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4" id="amenitiesGrid">
+            {% if project_amenities %}
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4" id="amenitiesGrid">
 
-        {% for item in project_amenities %}
-        <div class="amenity-card {% if forloop.counter > 12 %}hidden more-item{% endif %}">
+            {% for item in project_amenities %}
+            <div class="amenity-card {% if forloop.counter > 12 %}hidden more-item{% endif %}">
 
-            <!-- IMAGE AREA -->
-            <div class="amenity-img-wrap">
-            {% if item.amenities.image %}
-                <img loading="lazy" src="{{ item.amenities.image.url }}" alt="{{ item.amenities.title }}" class="amenity-img">
-            {% else %}
-                <div class="amenity-placeholder">
-                <i class="fa-solid fa-star"></i>
+                <!-- IMAGE AREA -->
+                <div class="amenity-img-wrap">
+                {% if item.amenities.image %}
+                    <img loading="lazy" src="{{ item.amenities.image.url }}" alt="{{ item.amenities.title }}" class="amenity-img">
+                {% else %}
+                    <div class="amenity-placeholder">
+                    <i class="fa-solid fa-star"></i>
+                    </div>
+                {% endif %}
                 </div>
-            {% endif %}
+
+                <!-- TITLE -->
+                <p class="label">{{ item.amenities.title }}</p>
+
             </div>
+            {% endfor %}
 
-            <!-- TITLE -->
-            <p class="label">{{ item.amenities.title }}</p>
+            <!-- SHOW MORE -->
+            {% if project_amenities|length > 12 %}
+            <button id="showMoreBtn" type="button" class="showmore-btn">
+                + {{ project_amenities|length|add:"-12" }} More
+            </button>
+            {% endif %}
+
+            </div>
+            {% else %}
+            <p class="text-gray-500 text-sm">No amenities found for this project.</p>
+            {% endif %}
 
         </div>
-        {% endfor %}
-
-        <!-- SHOW MORE -->
-        {% if project_amenities|length > 12 %}
-        <button id="showMoreBtn" type="button" class="showmore-btn">
-            + {{ project_amenities|length|add:"-12" }} More
-        </button>
-        {% endif %}
-
-        </div>
-        {% else %}
-        <p class="text-gray-500 text-sm">No amenities found for this project.</p>
-        {% endif %}
-
-    </div>
     </section>
 
 
     <!-- ===================== JS FOR SHOW MORE ===================== -->
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
 
-        const btn = document.getElementById("showMoreBtn");
-        if (!btn) return;
+            const btn = document.getElementById("showMoreBtn");
+            if (!btn) return;
 
-        const hiddenItems = document.querySelectorAll(".more-item");
-        let expanded = false;
+            const hiddenItems = document.querySelectorAll(".more-item");
+            let expanded = false;
 
-        const totalHidden = hiddenItems.length;
+            const totalHidden = hiddenItems.length;
 
-        // initial text (safe)
-        btn.textContent = "+ " + totalHidden + " More";
+            // initial text (safe)
+            btn.textContent = "+ " + totalHidden + " More";
 
-        btn.addEventListener("click", () => {
-            expanded = !expanded;
+            btn.addEventListener("click", () => {
+                expanded = !expanded;
 
-            hiddenItems.forEach(item => {
-                item.classList.toggle("hidden");
+                hiddenItems.forEach(item => {
+                    item.classList.toggle("hidden");
+                });
+
+                btn.textContent = expanded
+                    ? "− Show Less"
+                    : "+ " + totalHidden + " More";
             });
-
-            btn.textContent = expanded
-                ? "− Show Less"
-                : "+ " + totalHidden + " More";
         });
-    });
     </script>
 
 
@@ -1073,56 +1078,56 @@
 
     <!-- ===================== EMI CALCULATOR ===================== -->
     <section class="bg-white border-b" id="emi_calculator">
-    <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-8">
-        <div>
-        <h2 class="text-2xl font-semibold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-calculator text-gray-700 text-xl"></i>
-            EMI Calculator
-        </h2>
-        <p class="text-sm text-gray-700 mb-4">
-            Estimate your monthly EMI based on loan amount, interest rate and tenure.
-        </p>
+        <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-8">
+            <div>
+            <h2 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-calculator text-gray-700 text-xl"></i>
+                EMI Calculator
+            </h2>
+            <p class="text-sm text-gray-700 mb-4">
+                Estimate your monthly EMI based on loan amount, interest rate and tenure.
+            </p>
 
-        <form id="emiForm" class="space-y-4 text-sm">
-            <div>
-            <label class="block text-gray-600 mb-1">Property Price (₹)</label>
-            <input type="number" id="priceInput" class="w-full border px-3 py-2"
-                placeholder="27000000" />
-            </div>
-            <div>
-            <label class="block text-gray-600 mb-1">Down Payment (₹)</label>
-            <input type="number" id="downInput" class="w-full border px-3 py-2"
-                placeholder="5000000" />
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label class="block text-gray-600 mb-1">Interest Rate (% p.a.)</label>
-                <input type="number" id="rateInput" class="w-full border px-3 py-2"
-                placeholder="8.5" step="0.1" />
-            </div>
-            <div>
-                <label class="block text-gray-600 mb-1">Tenure (Years)</label>
-                <input type="number" id="tenureInput" class="w-full border px-3 py-2"
-                placeholder="20" />
-            </div>
+            <form id="emiForm" class="space-y-4 text-sm">
+                <div>
+                <label class="block text-gray-600 mb-1">Property Price (₹)</label>
+                <input type="number" id="priceInput" class="w-full border px-3 py-2"
+                    placeholder="27000000" />
+                </div>
+                <div>
+                <label class="block text-gray-600 mb-1">Down Payment (₹)</label>
+                <input type="number" id="downInput" class="w-full border px-3 py-2"
+                    placeholder="5000000" />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-gray-600 mb-1">Interest Rate (% p.a.)</label>
+                    <input type="number" id="rateInput" class="w-full border px-3 py-2"
+                    placeholder="8.5" step="0.1" />
+                </div>
+                <div>
+                    <label class="block text-gray-600 mb-1">Tenure (Years)</label>
+                    <input type="number" id="tenureInput" class="w-full border px-3 py-2"
+                    placeholder="20" />
+                </div>
+                </div>
+
+                <button type="button" id="emiBtn"
+                class="bg-gray-900 text-white px-4 py-2 text-sm">
+                Calculate EMI
+                </button>
+            </form>
             </div>
 
-            <button type="button" id="emiBtn"
-            class="bg-gray-900 text-white px-4 py-2 text-sm">
-            Calculate EMI
-            </button>
-        </form>
+            <div class="border rounded-md p-5 text-sm flex flex-col justify-center">
+            <h3 class="font-semibold mb-3">Estimated EMI</h3>
+            <p class="text-3xl font-semibold mb-2" id="emiResult">₹0 / month</p>
+            <p class="text-xs text-gray-500">
+                This is an approximate calculation for illustration only. For an exact
+                quote, please connect with our home-loan partner.
+            </p>
+            </div>
         </div>
-
-        <div class="border rounded-md p-5 text-sm flex flex-col justify-center">
-        <h3 class="font-semibold mb-3">Estimated EMI</h3>
-        <p class="text-3xl font-semibold mb-2" id="emiResult">₹0 / month</p>
-        <p class="text-xs text-gray-500">
-            This is an approximate calculation for illustration only. For an exact
-            quote, please connect with our home-loan partner.
-        </p>
-        </div>
-    </div>
     </section>
 
     <script>
@@ -1146,86 +1151,86 @@
     <!-- ===================== About Developer ===================== -->
     <section class="max-w-7xl mx-auto p-4 scroll-mt-[130px]" id="about_developer">
 
-    <!-- TOP HEADER BAR -->
-    <div class="bg-[#e8eff5] px-5 py-3 border rounded-t-lg flex items-center justify-between">
-        <h2 class="text-xl font-semibold text-[#1b4d6b]">
-        About {{ project.developer }}
-        </h2>
-    </div>
+     <!-- TOP HEADER BAR -->
+        <div class="bg-[#e8eff5] px-5 py-3 border rounded-t-lg flex items-center justify-between">
+            <h2 class="text-xl font-semibold text-[#1b4d6b]">
+            About {{ project.developer }}
+            </h2>
+        </div>
 
-    <!-- CONTENT BOX -->
-    <div class="bg-white border border-t-0 rounded-b-lg p-6">
+        <!-- CONTENT BOX -->
+        <div class="bg-white border border-t-0 rounded-b-lg p-6">
 
-        <!-- ROW: LOGO + DESCRIPTION -->
-        <div class="flex flex-col md:flex-row gap-8 items-start">
+            <!-- ROW: LOGO + DESCRIPTION -->
+            <div class="flex flex-col md:flex-row gap-8 items-start">
 
-        <!-- LOGO BOX -->
-        <div class="min-w-[200px]">
-            <p class="font-semibold text-gray-700 mb-2">
-            {{ project.developer }}
-            </p>
+            <!-- LOGO BOX -->
+            <div class="min-w-[200px]">
+                <p class="font-semibold text-gray-700 mb-2">
+                {{ project.developer }}
+                </p>
 
-            <div class="w-[200px] h-[90px] border rounded-xl shadow-sm flex items-center justify-center bg-white overflow-hidden">
+                <div class="w-[200px] h-[90px] border rounded-xl shadow-sm flex items-center justify-center bg-white overflow-hidden">
 
-            {% if project.developer and project.developer.logo %}
-                <img loading="lazy" src="{{ project.developer.logo.url }}"
-                    alt="{{ project.developer.name }} Logo"
-                    class="w-full h-full object-contain p-2" />
-            {% else %}
-                <!-- ✅ Fallback (no crash) -->
-                <div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-500">
-                <i class="fa-solid fa-building text-xl mb-1"></i>
-                <span class="text-xs font-semibold">Logo Not Available</span>
+                {% if project.developer and project.developer.logo %}
+                    <img loading="lazy" src="{{ project.developer.logo.url }}"
+                        alt="{{ project.developer.name }} Logo"
+                        class="w-full h-full object-contain p-2" />
+                {% else %}
+                    <!-- ✅ Fallback (no crash) -->
+                    <div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-500">
+                    <i class="fa-solid fa-building text-xl mb-1"></i>
+                    <span class="text-xs font-semibold">Logo Not Available</span>
+                    </div>
+                {% endif %}
+
                 </div>
-            {% endif %}
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="flex-1">
+                <p class="text-sm text-gray-700 leading-relaxed">
+                {% if project.developer and project.developer.about_developer %}
+                    {{ project.developer.about_developer }}
+                {% else %}
+                    <span class="text-gray-500">Developer description not available.</span>
+                {% endif %}
+                </p>
+            </div>
 
             </div>
-        </div>
-
-        <!-- DESCRIPTION -->
-        <div class="flex-1">
-            <p class="text-sm text-gray-700 leading-relaxed">
-            {% if project.developer and project.developer.about_developer %}
-                {{ project.developer.about_developer }}
-            {% else %}
-                <span class="text-gray-500">Developer description not available.</span>
-            {% endif %}
-            </p>
-        </div>
 
         </div>
-
-    </div>
 
     </section>
 
     <!-- ===================== FAQ's ===================== -->
     <section id="faqs" class="max-w-7xl mx-auto p-3 scroll-mt-[120px]">
 
-    <div class="bg-[#e8eff5] px-4 py-2 border rounded-t-lg">
-    <h2 class="text-lg font-semibold text-[#1b4d6b]">
-        Frequently Asked Questions – {{ project.project_name }}
-    </h2>
-    </div>
+        <div class="bg-[#e8eff5] px-4 py-2 border rounded-t-lg">
+            <h2 class="text-lg font-semibold text-[#1b4d6b]">
+                Frequently Asked Questions – {{ project.project_name }}
+            </h2>
+        </div>
 
-    <div class="bg-white border border-t-0 rounded-b-lg p-2 space-y-2 max-h-[420px] overflow-y-auto">
+        <div class="bg-white border border-t-0 rounded-b-lg p-2 space-y-2 max-h-[420px] overflow-y-auto">
 
-    {% for faq in project.faqs.all %}
-    <div class="faq-item border rounded-lg bg-[#f7fafc]">
+            {% for faq in project.faqs.all %}
+            <div class="faq-item border rounded-lg bg-[#f7fafc]">
 
-    <div class="faq-question cursor-pointer flex justify-between items-center px-3 py-2 text-sm font-medium">
-        {{ faq.question }}
-        <span class="faq-icon transition-transform">+</span>
-    </div>
+                <div class="faq-question cursor-pointer flex justify-between items-center px-3 py-2 text-sm font-medium">
+                    {{ faq.question }}
+                    <span class="faq-icon transition-transform">+</span>
+                </div>
 
-    <div class="faq-answer hidden px-3 pb-2 text-sm text-gray-600 leading-relaxed">
-        {{ faq.answer }}
-    </div>
+                <div class="faq-answer hidden px-3 pb-2 text-sm text-gray-600 leading-relaxed">
+                    {{ faq.answer }}
+                </div>
 
-    </div>
-    {% endfor %}
+            </div>
+            {% endfor %}
 
-    </div>
+        </div>
     </section>
 
     {% if project.rera.exists %}
@@ -1504,557 +1509,724 @@
         <img loading="lazy" id="unitPlanPopupImg" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
     </div>
 
+    <!-- Share Popup -->
+    <div id="sharePopup" class="hidden fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+
+        <div class="relative bg-white w-full max-w-md overflow-hidden shadow-2xl animate-[popup_.35s_ease]">
+
+            <!-- Top Gradient -->
+            <div class="bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 p-6 text-white relative">
+
+                <!-- Close -->
+                <button id="closeSharePopup" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 transition flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+
+                <div class="flex items-center gap-4">
+
+                    <!-- Icon -->
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold leading-tight">
+                            Share This Project
+                        </h2>
+
+                        <p class="text-sm text-white/80 mt-1">
+                            Send this property to your friends & family
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Share Options -->
+            <div class="p-6">
+
+                <div class="grid grid-cols-4 gap-4">
+
+                    <!-- WhatsApp -->
+                    <a id="whatsappShare" target="_blank" class="group flex flex-col items-center gap-2">
+
+                        <div class="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition duration-300">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+
+                        <span class="text-xs font-medium text-gray-700">
+                            WhatsApp
+                        </span>
+
+                    </a>
+
+                    <!-- Facebook -->
+                    <a id="facebookShare" target="_blank" class="group flex flex-col items-center gap-2">
+
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition duration-300">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </div>
+
+                        <span class="text-xs font-medium text-gray-700">
+                            Facebook
+                        </span>
+
+                    </a>
+
+                    <!-- Twitter -->
+                    <a id="twitterShare" target="_blank" class="group flex flex-col items-center gap-2">
+
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-black text-white flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition duration-300">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </div>
+
+                        <span class="text-xs font-medium text-gray-700">
+                            X
+                        </span>
+
+                    </a>
+
+                    <!-- Telegram -->
+                    <a id="telegramShare" target="_blank" class="group flex flex-col items-center gap-2">
+
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition duration-300">
+                            <i class="fa-brands fa-telegram"></i>
+                        </div>
+
+                        <span class="text-xs font-medium text-gray-700">
+                            Telegram
+                        </span>
+
+                    </a>
+
+                </div>
+
+                <!-- Divider -->
+                <div class="my-6 border-t"></div>
+
+                <!-- Copy Link -->
+                <div
+                    class="flex items-center gap-3 border rounded-2xl p-3 bg-gray-50">
+
+                    <div class="w-11 h-11 rounded-xl bg-orange-100 text-orange-500 flex items-center justify-center">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+
+                    <input type="text" id="shareLinkInput" readonly class="flex-1 bg-transparent outline-none text-sm text-gray-700 truncate">
+
+                    <button id="copyLinkBtn" class="px-4 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium transition">
+                        Copy
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
     <!-- ================= END POPUP ================= -->
 
 </main>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
-  /* =====================================================
-     CONTACT POPUP SETUP
-  ===================================================== */
+    /* =====================================================
+        CONTACT POPUP SETUP
+    ===================================================== */
 
-  const contactPopup = document.getElementById("contactPopup");
-  const closeContactPopup = document.getElementById("closeContactPopup");
-  const enquiryProjectName = document.getElementById("enquiryProjectName");
-  const projectIdInput = document.getElementById("projectIdInput");
-  const enquiryForm = document.getElementById("enquiryForm");
+    const contactPopup = document.getElementById("contactPopup");
+    const closeContactPopup = document.getElementById("closeContactPopup");
+    const enquiryProjectName = document.getElementById("enquiryProjectName");
+    const projectIdInput = document.getElementById("projectIdInput");
+    const enquiryForm = document.getElementById("enquiryForm");
 
-  function openPopup(btn, typeText = "") {
-    const name = btn.dataset.project || "Enquiry";
-    const id = btn.dataset.projectId || "";
+    function openPopup(btn, typeText = "") {
+        const name = btn.dataset.project || "Enquiry";
+        const id = btn.dataset.projectId || "";
 
-    enquiryProjectName.textContent = typeText
-      ? `${name} - ${typeText}`
-      : name;
+        enquiryProjectName.textContent = typeText
+        ? `${name} - ${typeText}`
+        : name;
 
-    projectIdInput.value = id;
+        projectIdInput.value = id;
 
-    contactPopup.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
-  }
-
-  /* =====================================================
-     BUTTON HANDLERS
-  ===================================================== */
-
-  // Price Sheet / General Enquiry
-  document.querySelectorAll(".openEnquiryPopup").forEach(btn => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      openPopup(this, this.dataset.type || "Enquiry");
-    });
-  });
-
-  // Brochure
-  document.querySelectorAll(".openBrochurePopup").forEach(btn => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      openPopup(this, "Brochure");
-    });
-  });
-
-  // Plan Kit
-  document.querySelectorAll(".openPlanPopup").forEach(btn => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      openPopup(this, "Plan Kit");
-    });
-  });
-
-  /* =====================================================
-     CLOSE POPUP
-  ===================================================== */
-
-  closeContactPopup?.addEventListener("click", () => {
-    contactPopup.classList.add("hidden");
-    document.body.style.overflow = "";
-  });
-
-  contactPopup?.addEventListener("click", e => {
-    if (e.target === contactPopup) {
-      contactPopup.classList.add("hidden");
-      document.body.style.overflow = "";
+        contactPopup.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
     }
-  });
 
-});
+    /* =====================================================
+        BUTTON HANDLERS
+    ===================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-    const rp=document.getElementById("relatedProjects");
-    function scrollLeftRP(){rp.scrollBy({left:-rp.offsetWidth,behavior:"smooth"});}
-    function scrollRightRP(){rp.scrollBy({left:rp.offsetWidth,behavior:"smooth"});}
- /* =====================================================
-     CONTACT POPUP
-  ===================================================== */
-  const contactPopup = document.getElementById("contactPopup");
-  const closeContactPopup = document.getElementById("closeContactPopup");
-  const enquiryProjectName = document.getElementById("enquiryProjectName");
-  const projectIdInput = document.getElementById("projectIdInput");
-  const enquiryForm = document.getElementById("enquiryForm");
-
-  document.querySelectorAll(".openContactPopup").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.preventDefault();
-      enquiryProjectName.textContent = btn.dataset.project || "Enquiry";
-      projectIdInput.value = btn.dataset.projectId || "";
-      enquiryForm.action = `/projects/submit-enquiry/${btn.dataset.projectId}/`;
-      contactPopup.classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  closeContactPopup?.addEventListener("click", () => {
-    contactPopup.classList.add("hidden");
-    document.body.style.overflow = "";
-  });
-
-  contactPopup?.addEventListener("click", e => {
-    if (e.target === contactPopup) {
-      contactPopup.classList.add("hidden");
-      document.body.style.overflow = "";
-    }
-  });
-
-  /* =====================================================
-     TABS
-  ===================================================== */
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(b => {
-        b.classList.remove("text-green-700", "border-b-2", "border-green-700");
-        b.classList.add("text-gray-600");
-      });
-
-      btn.classList.add("text-green-700", "border-b-2", "border-green-700");
-      btn.classList.remove("text-gray-600");
-
-      document.querySelectorAll(".tab-content").forEach(tab => tab.classList.add("hidden"));
-      document.getElementById(btn.dataset.tab)?.classList.remove("hidden");
-    });
-  });
-
-  /* =====================================================
-     IMAGE GALLERY POPUP
-  ===================================================== */
-  const popup = document.getElementById("popup");
-  const popupImg = document.getElementById("popupImg");
-  const closeBtn = document.getElementById("closeBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
-  const viewAllBtn = document.querySelector(".view-all-btn");
-  const galleryImages = document.querySelectorAll(".gallery-img");
-
-  const images = [...galleryImages].map(img => img.src);
-  let currentIndex = 0;
-
-  const openPopup = index => {
-    currentIndex = index;
-    popupImg.src = images[currentIndex];
-    popup.classList.remove("hidden");
-    popup.classList.add("flex");
-    document.body.style.overflow = "hidden";
-  };
-
-  const closePopup = () => {
-    popup.classList.add("hidden");
-    popup.classList.remove("flex");
-    document.body.style.overflow = "";
-  };
-
-  const showNext = () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    popupImg.src = images[currentIndex];
-  };
-
-  const showPrev = () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    popupImg.src = images[currentIndex];
-  };
-
-  galleryImages.forEach((img, i) => img.addEventListener("click", () => openPopup(i)));
-  viewAllBtn?.addEventListener("click", () => openPopup(0));
-  closeBtn?.addEventListener("click", closePopup);
-  nextBtn?.addEventListener("click", showNext);
-  prevBtn?.addEventListener("click", showPrev);
-
-  popup?.addEventListener("click", e => {
-    if (e.target === popup) closePopup();
-  });
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closePopup();
-    if (e.key === "ArrowRight") showNext();
-    if (e.key === "ArrowLeft") showPrev();
-  });
-
-  /* =====================================================
-     UNIT PLAN POPUP
-  ===================================================== */
-  const unitPlanPopup = document.getElementById("unitPlanPopup");
-  const unitPlanImg = document.getElementById("unitPlanPopupImg");
-
-  document.querySelectorAll(".unit-plan-img").forEach(img => {
-    img.addEventListener("click", () => {
-      unitPlanImg.src = img.src;
-      unitPlanPopup.classList.remove("hidden");
-      unitPlanPopup.classList.add("flex");
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  unitPlanPopup?.addEventListener("click", () => {
-    unitPlanPopup.classList.add("hidden");
-    unitPlanPopup.classList.remove("flex");
-    document.body.style.overflow = "";
-  });
-
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-
-const btn = document.getElementById("readMoreBtn");
-const wrapper = document.getElementById("aboutMoreWrapper");
-const text = document.getElementById("readMoreText");
-const icon = document.getElementById("readMoreIcon");
-
-// safety check
-if (!btn || !wrapper) return;
-
-let open = false;
-
-btn.addEventListener("click", function () {
-    open = !open;
-
-    if (open) {
-        wrapper.style.maxHeight = wrapper.scrollHeight + "px";
-        text.textContent = "Read Less";
-        icon.style.transform = "rotate(180deg)";
-    } else {
-        wrapper.style.maxHeight = "0px";
-        text.textContent = "Read More";
-        icon.style.transform = "rotate(0deg)";
-    }
-});
-
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const popup = document.getElementById("unitPlanPopup");
-    const popupImg = document.getElementById("unitPlanPopupImg");
-    const closeBtn = document.getElementById("closeUnitPlanPopup");
-
-    document.querySelectorAll(".unit-plan-img").forEach(img => {
-        img.addEventListener("click", () => {
-            popupImg.src = img.src;
-            popup.classList.remove("hidden");
-            popup.classList.add("flex");
-            document.body.style.overflow = "hidden";
+    // Price Sheet / General Enquiry
+    document.querySelectorAll(".openEnquiryPopup").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openPopup(this, this.dataset.type || "Enquiry");
         });
     });
 
-    function closePopup() {
+    // Brochure
+    document.querySelectorAll(".openBrochurePopup").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openPopup(this, "Brochure");
+        });
+    });
+
+    // Plan Kit
+    document.querySelectorAll(".openPlanPopup").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openPopup(this, "Plan Kit");
+        });
+    });
+
+    /* =====================================================
+        CLOSE POPUP
+    ===================================================== */
+
+    closeContactPopup?.addEventListener("click", () => {
+        contactPopup.classList.add("hidden");
+        document.body.style.overflow = "";
+    });
+
+    contactPopup?.addEventListener("click", e => {
+        if (e.target === contactPopup) {
+        contactPopup.classList.add("hidden");
+        document.body.style.overflow = "";
+        }
+    });
+
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const rp=document.getElementById("relatedProjects");
+        function scrollLeftRP(){rp.scrollBy({left:-rp.offsetWidth,behavior:"smooth"});}
+        function scrollRightRP(){rp.scrollBy({left:rp.offsetWidth,behavior:"smooth"});}
+    
+   
+    const contactPopup = document.getElementById("contactPopup");
+    const closeContactPopup = document.getElementById("closeContactPopup");
+    const enquiryProjectName = document.getElementById("enquiryProjectName");
+    const projectIdInput = document.getElementById("projectIdInput");
+    const enquiryForm = document.getElementById("enquiryForm");
+
+    document.querySelectorAll(".openContactPopup").forEach(btn => {
+        btn.addEventListener("click", e => {
+        e.preventDefault();
+        enquiryProjectName.textContent = btn.dataset.project || "Enquiry";
+        projectIdInput.value = btn.dataset.projectId || "";
+        enquiryForm.action = `/projects/submit-enquiry/${btn.dataset.projectId}/`;
+        contactPopup.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+        });
+    });
+
+    closeContactPopup?.addEventListener("click", () => {
+        contactPopup.classList.add("hidden");
+        document.body.style.overflow = "";
+    });
+
+    contactPopup?.addEventListener("click", e => {
+        if (e.target === contactPopup) {
+        contactPopup.classList.add("hidden");
+        document.body.style.overflow = "";
+        }
+    });
+
+    
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => {
+            b.classList.remove("text-green-700", "border-b-2", "border-green-700");
+            b.classList.add("text-gray-600");
+        });
+
+        btn.classList.add("text-green-700", "border-b-2", "border-green-700");
+        btn.classList.remove("text-gray-600");
+
+        document.querySelectorAll(".tab-content").forEach(tab => tab.classList.add("hidden"));
+        document.getElementById(btn.dataset.tab)?.classList.remove("hidden");
+        });
+    });
+
+   
+    const popup = document.getElementById("popup");
+    const popupImg = document.getElementById("popupImg");
+    const closeBtn = document.getElementById("closeBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const viewAllBtn = document.querySelector(".view-all-btn");
+    const galleryImages = document.querySelectorAll(".gallery-img");
+
+    const images = [...galleryImages].map(img => img.src);
+    let currentIndex = 0;
+
+    const openPopup = index => {
+        currentIndex = index;
+        popupImg.src = images[currentIndex];
+        popup.classList.remove("hidden");
+        popup.classList.add("flex");
+        document.body.style.overflow = "hidden";
+    };
+
+    const closePopup = () => {
         popup.classList.add("hidden");
         popup.classList.remove("flex");
         document.body.style.overflow = "";
-    }
+    };
 
-    // Close button
-    closeBtn.addEventListener("click", closePopup);
+    const showNext = () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        popupImg.src = images[currentIndex];
+    };
 
-    // Click outside image
-    popup.addEventListener("click", e => {
+    const showPrev = () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        popupImg.src = images[currentIndex];
+    };
+
+    galleryImages.forEach((img, i) => img.addEventListener("click", () => openPopup(i)));
+    viewAllBtn?.addEventListener("click", () => openPopup(0));
+    closeBtn?.addEventListener("click", closePopup);
+    nextBtn?.addEventListener("click", showNext);
+    prevBtn?.addEventListener("click", showPrev);
+
+    popup?.addEventListener("click", e => {
         if (e.target === popup) closePopup();
     });
 
-    // ESC key
     document.addEventListener("keydown", e => {
         if (e.key === "Escape") closePopup();
+        if (e.key === "ArrowRight") showNext();
+        if (e.key === "ArrowLeft") showPrev();
     });
 
-});
+   
+    const unitPlanPopup = document.getElementById("unitPlanPopup");
+    const unitPlanImg = document.getElementById("unitPlanPopupImg");
 
-document.getElementById("emiBtn").addEventListener("click", function () {
+    document.querySelectorAll(".unit-plan-img").forEach(img => {
+        img.addEventListener("click", () => {
+        unitPlanImg.src = img.src;
+        unitPlanPopup.classList.remove("hidden");
+        unitPlanPopup.classList.add("flex");
+        document.body.style.overflow = "hidden";
+        });
+    });
 
-let price = parseFloat(document.getElementById("priceInput").value) || 0;
-let down = parseFloat(document.getElementById("downInput").value) || 0;
-let rate = parseFloat(document.getElementById("rateInput").value) || 0;
-let tenureYears = parseFloat(document.getElementById("tenureInput").value) || 0;
+    unitPlanPopup?.addEventListener("click", () => {
+        unitPlanPopup.classList.add("hidden");
+        unitPlanPopup.classList.remove("flex");
+        document.body.style.overflow = "";
+    });
 
-// Loan Amount
-let loanAmount = price - down;
-if (loanAmount <= 0) {
-    document.getElementById("emiResult").innerHTML = "Invalid Inputs";
-    return;
-}
+    });
 
-// Convert annual rate to monthly
-let monthlyRate = rate / 12 / 100;
+    document.addEventListener("DOMContentLoaded", function () {
 
-// Total months
-let months = tenureYears * 12;
+    const btn = document.getElementById("readMoreBtn");
+    const wrapper = document.getElementById("aboutMoreWrapper");
+    const text = document.getElementById("readMoreText");
+    const icon = document.getElementById("readMoreIcon");
 
-// EMI Formula
-let emi =
-    (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
-    (Math.pow(1 + monthlyRate, months) - 1);
+    // safety check
+    if (!btn || !wrapper) return;
 
-if (!emi || emi < 0) {
-    document.getElementById("emiResult").innerHTML = "Invalid Inputs";
-    return;
-}
+    let open = false;
 
-// Format output
-document.getElementById("emiResult").innerHTML =
-    "₹" + emi.toLocaleString("en-IN", { maximumFractionDigits: 0 }) + " / month";
-});
+    btn.addEventListener("click", function () {
+        open = !open;
 
-const navLinks = document.querySelectorAll(".nav-link");
-const navScroll = document.getElementById("navScroll");
-const navLeft = document.getElementById("navLeft");
-const navRight = document.getElementById("navRight");
+        if (open) {
+            wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+            text.textContent = "Read Less";
+            icon.style.transform = "rotate(180deg)";
+        } else {
+            wrapper.style.maxHeight = "0px";
+            text.textContent = "Read More";
+            icon.style.transform = "rotate(0deg)";
+        }
+    });
 
-/* ACTIVE TAB ON CLICK */
-navLinks.forEach(link => {
-link.addEventListener("click", () => {
-    document.querySelector(".nav-link.active")?.classList.remove("active");
-    link.classList.add("active");
+    });
 
-    const linkPos =
-    link.offsetLeft -
-    navScroll.offsetWidth / 2 +
-    link.offsetWidth / 2;
+    document.addEventListener("DOMContentLoaded", function () {
 
-    navScroll.scrollTo({ left: linkPos, behavior: "smooth" });
-});
-});
+        const popup = document.getElementById("unitPlanPopup");
+        const popupImg = document.getElementById("unitPlanPopupImg");
+        const closeBtn = document.getElementById("closeUnitPlanPopup");
 
-/* LEFT RIGHT SCROLL */
-navLeft.addEventListener("click", () => {
-navScroll.scrollBy({ left: -200, behavior: "smooth" });
-});
+        document.querySelectorAll(".unit-plan-img").forEach(img => {
+            img.addEventListener("click", () => {
+                popupImg.src = img.src;
+                popup.classList.remove("hidden");
+                popup.classList.add("flex");
+                document.body.style.overflow = "hidden";
+            });
+        });
 
-navRight.addEventListener("click", () => {
-navScroll.scrollBy({ left: 200, behavior: "smooth" });
-});
+        function closePopup() {
+            popup.classList.add("hidden");
+            popup.classList.remove("flex");
+            document.body.style.overflow = "";
+        }
 
-/* AUTO ACTIVE ON SCROLL */
-const sections = document.querySelectorAll(`
-#overview,
-#pricing,
-#location,
-#video,
-#amenities,
-#floorplan,
-#paymentscheme,
-#bank_offers,
-#emi_calculator,
-#about_developer,
-#faqs
-`);
+        // Close button
+        closeBtn.addEventListener("click", closePopup);
 
-let activeSection = null;
+        // Click outside image
+        popup.addEventListener("click", e => {
+            if (e.target === popup) closePopup();
+        });
 
-window.addEventListener("scroll", () => {
-let scrollPos = window.scrollY + 180;
+        // ESC key
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") closePopup();
+        });
 
-sections.forEach(section => {
-    if (
-    scrollPos >= section.offsetTop &&
-    scrollPos < section.offsetTop + section.offsetHeight
-    ) {
-    const id = section.id;
+    });
 
-    if (activeSection !== id) {
-        activeSection = id;
+    document.getElementById("emiBtn").addEventListener("click", function () {
 
+    let price = parseFloat(document.getElementById("priceInput").value) || 0;
+    let down = parseFloat(document.getElementById("downInput").value) || 0;
+    let rate = parseFloat(document.getElementById("rateInput").value) || 0;
+    let tenureYears = parseFloat(document.getElementById("tenureInput").value) || 0;
+
+    // Loan Amount
+    let loanAmount = price - down;
+    if (loanAmount <= 0) {
+        document.getElementById("emiResult").innerHTML = "Invalid Inputs";
+        return;
+    }
+
+    // Convert annual rate to monthly
+    let monthlyRate = rate / 12 / 100;
+
+    // Total months
+    let months = tenureYears * 12;
+
+    // EMI Formula
+    let emi =
+        (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+        (Math.pow(1 + monthlyRate, months) - 1);
+
+    if (!emi || emi < 0) {
+        document.getElementById("emiResult").innerHTML = "Invalid Inputs";
+        return;
+    }
+
+    // Format output
+    document.getElementById("emiResult").innerHTML =
+        "₹" + emi.toLocaleString("en-IN", { maximumFractionDigits: 0 }) + " / month";
+    });
+
+    const navLinks = document.querySelectorAll(".nav-link");
+    const navScroll = document.getElementById("navScroll");
+    const navLeft = document.getElementById("navLeft");
+    const navRight = document.getElementById("navRight");
+
+    /* ACTIVE TAB ON CLICK */
+    navLinks.forEach(link => {
+    link.addEventListener("click", () => {
         document.querySelector(".nav-link.active")?.classList.remove("active");
-
-        const newActive = document.querySelector(`.nav-link[href="#${id}"]`);
-        if (newActive) {
-        newActive.classList.add("active");
+        link.classList.add("active");
 
         const linkPos =
-            newActive.offsetLeft -
-            navScroll.offsetWidth / 2 +
-            newActive.offsetWidth / 2;
+        link.offsetLeft -
+        navScroll.offsetWidth / 2 +
+        link.offsetWidth / 2;
 
         navScroll.scrollTo({ left: linkPos, behavior: "smooth" });
+    });
+    });
+
+    /* LEFT RIGHT SCROLL */
+    navLeft.addEventListener("click", () => {
+    navScroll.scrollBy({ left: -200, behavior: "smooth" });
+    });
+
+    navRight.addEventListener("click", () => {
+    navScroll.scrollBy({ left: 200, behavior: "smooth" });
+    });
+
+    /* AUTO ACTIVE ON SCROLL */
+    const sections = document.querySelectorAll(`
+    #overview,
+    #pricing,
+    #location,
+    #video,
+    #amenities,
+    #floorplan,
+    #paymentscheme,
+    #bank_offers,
+    #emi_calculator,
+    #about_developer,
+    #faqs
+    `);
+
+    let activeSection = null;
+
+    window.addEventListener("scroll", () => {
+    let scrollPos = window.scrollY + 180;
+
+    sections.forEach(section => {
+        if (
+        scrollPos >= section.offsetTop &&
+        scrollPos < section.offsetTop + section.offsetHeight
+        ) {
+        const id = section.id;
+
+        if (activeSection !== id) {
+            activeSection = id;
+
+            document.querySelector(".nav-link.active")?.classList.remove("active");
+
+            const newActive = document.querySelector(`.nav-link[href="#${id}"]`);
+            if (newActive) {
+            newActive.classList.add("active");
+
+            const linkPos =
+                newActive.offsetLeft -
+                navScroll.offsetWidth / 2 +
+                newActive.offsetWidth / 2;
+
+            navScroll.scrollTo({ left: linkPos, behavior: "smooth" });
+            }
         }
-    }
-    }
-});
-});
+        }
+    });
+    });
 
-document.querySelectorAll(".faq-question").forEach(q => {
+    document.querySelectorAll(".faq-question").forEach(q => {
 
-  q.addEventListener("click", () => {
+    q.addEventListener("click", () => {
 
-    const item = q.closest(".faq-item")
-    const ans = item.querySelector(".faq-answer")
-    const icon = item.querySelector(".faq-icon")
+        const item = q.closest(".faq-item")
+        const ans = item.querySelector(".faq-answer")
+        const icon = item.querySelector(".faq-icon")
 
-    const isOpen = !ans.classList.contains("hidden")
+        const isOpen = !ans.classList.contains("hidden")
 
-    // close all
-    document.querySelectorAll(".faq-answer").forEach(a => a.classList.add("hidden"))
-    document.querySelectorAll(".faq-icon").forEach(i => i.textContent = "+")
+        // close all
+        document.querySelectorAll(".faq-answer").forEach(a => a.classList.add("hidden"))
+        document.querySelectorAll(".faq-icon").forEach(i => i.textContent = "+")
 
-    // toggle current
-    if (!isOpen) {
-      ans.classList.remove("hidden")
-      icon.textContent = "−"
-      ans.scrollIntoView({ behavior: "smooth", block: "nearest" })
-    }
+        // toggle current
+        if (!isOpen) {
+        ans.classList.remove("hidden")
+        icon.textContent = "−"
+        ans.scrollIntoView({ behavior: "smooth", block: "nearest" })
+        }
 
-  })
+    })
 
-})
+    })
+
+    const shareBtn = document.getElementById("shareBtn");
+    const sharePopup = document.getElementById("sharePopup");
+    const closeSharePopup = document.getElementById("closeSharePopup");
+
+    const currentUrl = window.location.href;
+    const shareText = document.title;
+
+    shareBtn.addEventListener("click", () => {
+
+    sharePopup.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    // WhatsApp
+    document.getElementById("whatsappShare").href =
+        `https://wa.me/?text=${encodeURIComponent(shareText + " " + currentUrl)}`;
+
+    // Facebook
+    document.getElementById("facebookShare").href =
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+
+    // Twitter / X
+    document.getElementById("twitterShare").href =
+        `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
+
+    // Telegram
+    document.getElementById("telegramShare").href =
+        `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
+    });
+
+    // Close popup
+    closeSharePopup.addEventListener("click", () => {
+        sharePopup.classList.add("hidden");
+        document.body.style.overflow = "";
+    });
+
+    // Close on outside click
+    sharePopup.addEventListener("click", (e) => {
+        if (e.target === sharePopup) {
+            sharePopup.classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+    });
+
+    // Copy Link
+    document.getElementById("copyLinkBtn").addEventListener("click", async () => {
+
+        await navigator.clipboard.writeText(currentUrl);
+
+        document.getElementById("copyLinkBtn").innerHTML =
+            `<i class="fa-solid fa-check mr-2"></i> Link Copied`;
+
+        setTimeout(() => {
+            document.getElementById("copyLinkBtn").innerHTML =
+                `<i class="fa-solid fa-link mr-2"></i> Copy Link`;
+        }, 2000);
+    });
 
 </script>
 
-
-
 <style>
 
-iframe {
-  width: 100%;
-}
-
-
-body.popup-open .project-badges,
-body.popup-open .header-badges,
-body.popup-open .rera-badges {
-  display: none !important;
-}
-
-.amenity-card {
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  background: #ffffff;
-  overflow: hidden;
-  min-height: 160px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: 0.25s ease;
-}
-
-.amenity-card:hover {
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-  transform: translateY(-2px);
-}
-
-/* Image wrapper – same height for all cards */
-.amenity-img-wrap {
-  width: 100%;
-  height: 95px;
-  background: #f8fafc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-/* Image */
-.amenity-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Placeholder (no image) */
-.amenity-placeholder {
-  width: 100%;
-  height: 100%;
-  font-size: 22px;
-  color: #94a3b8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Label */
-.amenity-card .label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #0f172a;
-  text-align: center;
-  padding: 10px 8px;
-  line-height: 1.2;
-}
-
-/* =====================================================
-   SHOW MORE BUTTON
-===================================================== */
-.showmore-btn {
-  width: 100%;
-  height: 44px;
-  border-radius: 14px;
-  border: 1px solid #cbd5e1;
-  background: #e8eff5;
-  font-size: 13px;
-  font-weight: 700;
-  color: #334155;
-  cursor: pointer;
-  transition: 0.25s ease;
-}
-
-.showmore-btn:hover {
-  background: #dbeafe;
-  transform: translateY(-1px);
-}
-
-/* =====================================================
-   ANIMATION
-===================================================== */
-.fadeIn {
-  animation: fadeIn 0.22s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* NAV LINK BASE */
-.nav-link{
-    position: relative;
-    padding-bottom: 6px;
-    transition: color .25s ease;
-}
-
-/* ACTIVE TEXT COLOR */
-.nav-link.active{
-    color: #15803d; /* green-700 */
-    font-weight: 600;
-}
-
-/* UNDERLINE */
-.nav-link::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0;
-    background-color: #15803d;
-    transition: width .25s ease;
-}
-
-/* ACTIVE UNDERLINE */
-.nav-link.active::after{
+    iframe {
     width: 100%;
-}
+    }
+
+
+    body.popup-open .project-badges,
+    body.popup-open .header-badges,
+    body.popup-open .rera-badges {
+    display: none !important;
+    }
+
+    .amenity-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+    overflow: hidden;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.25s ease;
+    }
+
+    .amenity-card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+    }
+
+    /* Image wrapper – same height for all cards */
+    .amenity-img-wrap {
+    width: 100%;
+    height: 95px;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    }
+
+    /* Image */
+    .amenity-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    }
+
+    /* Placeholder (no image) */
+    .amenity-placeholder {
+    width: 100%;
+    height: 100%;
+    font-size: 22px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    /* Label */
+    .amenity-card .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    text-align: center;
+    padding: 10px 8px;
+    line-height: 1.2;
+    }
+
+    /* =====================================================
+    SHOW MORE BUTTON
+    ===================================================== */
+    .showmore-btn {
+    width: 100%;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid #cbd5e1;
+    background: #e8eff5;
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+    cursor: pointer;
+    transition: 0.25s ease;
+    }
+
+    .showmore-btn:hover {
+    background: #dbeafe;
+    transform: translateY(-1px);
+    }
+
+    /* =====================================================
+    ANIMATION
+    ===================================================== */
+    .fadeIn {
+    animation: fadeIn 0.22s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    }
+    /* NAV LINK BASE */
+    .nav-link{
+        position: relative;
+        padding-bottom: 6px;
+        transition: color .25s ease;
+    }
+
+    /* ACTIVE TEXT COLOR */
+    .nav-link.active{
+        color: #15803d; /* green-700 */
+        font-weight: 600;
+    }
+
+    /* UNDERLINE */
+    .nav-link::after{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background-color: #15803d;
+        transition: width .25s ease;
+    }
+
+    /* ACTIVE UNDERLINE */
+    .nav-link.active::after{
+        width: 100%;
+    }
 </style>
 
 
