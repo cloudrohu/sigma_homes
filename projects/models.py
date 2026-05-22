@@ -69,7 +69,6 @@ def format_price_range(price_min, price_max):
     return f"{fmt(price_min)}–{fmt(price_max)}"
 
 
-
 class Project(MPTTModel):
     
     BHK_CHOICES = (
@@ -147,27 +146,30 @@ class Project(MPTTModel):
         verbose_name_plural='1. Project'
 
     # 🔑 CRITICAL FIX: Handling object-to-string conversion for slug creation
-    def save(self, *args, **kwargs):
-        if not self.id:
-            super().save(*args, **kwargs)
 
-        # Ensure locality and city objects are safely converted to strings for slugify
+    # 🔑 Slug Generate
+    def save(self, *args, **kwargs):
+
         locality_name = str(self.locality) if self.locality else ''
         city_name = str(self.city) if self.city else ''
 
-        base_slug = slugify(f"{self.project_name} {locality_name} {city_name}")
-        new_slug = f"{base_slug}-{self.id}"
+        base_slug = slugify(
+            f"{self.project_name} {locality_name} {city_name}"
+        )
 
-        if self.slug != new_slug:
-            self.slug = new_slug
-            # Use update_fields only if saving existing object
-            if self.pk:
-                super().save(update_fields=['slug'])
-            else:
-                super().save(*args, **kwargs)
-        else:
-            super().save(*args, **kwargs)
-    # --- End save method ---
+        slug = base_slug
+        counter = 1
+
+        # Unique slug
+        while Project.objects.exclude(pk=self.pk).filter(slug=slug).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
+
+        self.slug = slug
+
+        # SAVE TO DATABASE
+        super().save(*args, **kwargs)
+
 
     def image_tag(self):
         if self.image and hasattr(self.image, 'url'):
