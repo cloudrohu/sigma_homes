@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 from django.utils.html import mark_safe
 from .models import (
     Setting, Slider, Leadership, Why_Choose,
@@ -7,7 +8,7 @@ from .models import (
 )
 
 @admin.register(Setting)
-class SettingAdmin(admin.ModelAdmin):
+class SettingAdmin(ImportExportModelAdmin):
 
     list_display = (
         "site_name",
@@ -112,7 +113,7 @@ class SettingAdmin(admin.ModelAdmin):
     logo_preview.short_description = "Logo Preview"
 
 @admin.register(Slider)
-class SliderAdmin(admin.ModelAdmin):
+class SliderAdmin(ImportExportModelAdmin):
     list_display = ("title", "order", "is_active")
     list_editable = ("order", "is_active")
     search_fields = ("title", "subtitle")
@@ -120,13 +121,13 @@ class SliderAdmin(admin.ModelAdmin):
     ordering = ("order",)
 
 @admin.register(ContactEnquiry)
-class ContactEnquiryAdmin(admin.ModelAdmin):
+class ContactEnquiryAdmin(ImportExportModelAdmin):
     list_display = ("name", "email", "phone", "created_at")
     search_fields = ("name", "email", "phone")
     list_filter = ("created_at",) 
 
 @admin.register(Leadership)
-class LeadershipAdmin(admin.ModelAdmin):
+class LeadershipAdmin(ImportExportModelAdmin):
     list_display = (
         "name",
         "designation",
@@ -156,13 +157,13 @@ class LeadershipAdmin(admin.ModelAdmin):
     )
 
 @admin.register(Why_Choose)
-class WhyChooseAdmin(admin.ModelAdmin):
+class WhyChooseAdmin(ImportExportModelAdmin):
     list_display = ("title", "order", "is_active")
     list_editable = ("order", "is_active")
     search_fields = ("title",)
 
 @admin.register(About)
-class AboutAdmin(admin.ModelAdmin):
+class AboutAdmin(ImportExportModelAdmin):
 
     list_display = (
         "title",
@@ -242,36 +243,36 @@ class AboutAdmin(admin.ModelAdmin):
     )
 
 @admin.register(Contact_Page)
-class ContactPageAdmin(admin.ModelAdmin):
+class ContactPageAdmin(ImportExportModelAdmin):
     list_display = ("heading", "phone", "email")
     search_fields = ("heading", "phone", "email")
 
 @admin.register(Our_Team)
-class OurTeamAdmin(admin.ModelAdmin):
+class OurTeamAdmin(ImportExportModelAdmin):
     list_display = ("name", "designation")
     search_fields = ("name", "designation")
 
 @admin.register(Testimonial)
-class TestimonialAdmin(admin.ModelAdmin):
+class TestimonialAdmin(ImportExportModelAdmin):
     list_display = ("name", "designation", "rating")
     list_filter = ("rating",)
     search_fields = ("name", "designation", "message")
 
 
 @admin.register(FAQ)
-class FAQAdmin(admin.ModelAdmin):
+class FAQAdmin(ImportExportModelAdmin):
     list_display = ("question",)
     search_fields = ("question", "answer")
 
 @admin.register(ImpactMetric)
-class ImpactMetricAdmin(admin.ModelAdmin):
+class ImpactMetricAdmin(ImportExportModelAdmin):
     list_display = ("title", "value", "order", "created_on")
     list_editable = ("order",)
     ordering = ("order",)
     search_fields = ("title", "value")
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(ImportExportModelAdmin):
     list_display = ("title", "order", "is_active")
     list_editable = ("order", "is_active")
     search_fields = ("title", "description")
@@ -307,7 +308,7 @@ class ServiceAdmin(admin.ModelAdmin):
         return qs.select_related("parent")    
 
 @admin.register(FooterLink)
-class FooterLinkAdmin(admin.ModelAdmin):
+class FooterLinkAdmin(ImportExportModelAdmin):
     list_display = ("title", "parent", "order", "is_active")
     list_editable = ("order", "is_active")
     list_filter = ("is_active",)

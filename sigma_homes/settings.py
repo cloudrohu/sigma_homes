@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     'multiselectfield',
     'import_export',
+    
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.humanize',
