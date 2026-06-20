@@ -9,7 +9,7 @@ from utility.models import Locality,PropertyType,City,Bank,ProjectAmenities
 from blog.models import Blog, Category
 from .models import (
     Setting, Slider, Testimonial, About, Leadership,
-    Contact_Page, FAQ, Our_Team,Why_Choose,ImpactMetric, Service, FooterLink,ContactEnquiry
+    Contact_Page, FAQ, Our_Team,Why_Choose,ImpactMetric, Service, FooterLink,ContactEnquiry, PossessionMetric
 )
 from user.models import Developer 
     
@@ -66,6 +66,7 @@ def index(request):
     bank = Bank.objects.filter(home_loan_partner=True).order_by("title")
     blogs = Blog.objects.filter(is_published=True).order_by("-published_date", "-created_at")[:3]
     about_page = About.objects.filter(is_active=True).first()
+    possession_metric = PossessionMetric.objects.first()
     impactmetric = ImpactMetric.objects.all()
     amenities = ProjectAmenities.objects.all()
     footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
@@ -87,6 +88,7 @@ def index(request):
         "featured_developers": featured_developers,
         "featured_locality": featured_locality,
         "bank": bank,
+        "possession_metric": possession_metric,
         "blogs": blogs,
         "about_page": about_page,
         "impactmetric": impactmetric,

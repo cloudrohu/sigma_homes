@@ -320,3 +320,13 @@ class ContactEnquiry(models.Model):
 
     def __str__(self):
         return self.name    
+
+
+
+class PossessionMetric(models.Model):
+    ready_to_move = models.ImageField(default=0,upload_to='metrics/')
+    under_construction = models.ImageField(default=0,upload_to='metrics/')
+    upcoming = models.ImageField(default=0,upload_to='metrics/')
+
+    def __str__(self):
+        return "Possession Metrics"

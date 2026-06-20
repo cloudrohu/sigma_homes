@@ -517,7 +517,7 @@
 
         <!-- CARD 1 -->
         <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=Ready+To+Move&rera=" class="group relative  overflow-hidden shadow-lg border border-gray-100">
-          <img src="{% static 'images/ready-to-move.png' %}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="Ready to Move" >
+          <img src="{{possession_metric.ready_to_move.url}}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="Ready to Move" >
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
           <div class="absolute top-4 left-4">
@@ -544,7 +544,7 @@
 
         <!-- CARD 2 -->
         <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=Under+Construction&rera=" class="group relative  overflow-hidden shadow-lg border border-gray-100">
-          <img src="{% static 'images/under-construction.png' %}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="Under Construction">
+          <img src="{{possession_metric.under_construction.url}}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="Under Construction">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
           <div class="absolute top-4 left-4">
@@ -571,7 +571,7 @@
 
         <!-- CARD 3 -->
         <a target="_blank" href="{% url 'search_projects' %}?bhk=&construction_status=New+Launch&rera=" class="group relative  overflow-hidden shadow-lg border border-gray-100">
-          <img src="{% static 'images/new-launch.png' %}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="New Launch">
+          <img src="{{possession_metric.upcoming.url}}" class="w-full h-72 object-cover group-hover:scale-110 transition duration-700" alt="New Launch">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
           <div class="absolute top-4 left-4">
