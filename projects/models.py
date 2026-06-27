@@ -307,6 +307,7 @@ class Amenities(models.Model):
     def __str__(self):
         return f"{self.Project.project_name} - {self.amenities.title}"
 
+
 class Gallery(models.Model):
     Project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="gallery")
     image = models.ImageField(upload_to='gallery/')
@@ -349,8 +350,8 @@ class WhyInvest(models.Model):
         return f"Why Invest - {self.pk}"
 
 class BankOffer(models.Model):
-    Project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="amenities")
-    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name="amenities")
+    Project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="bank_offer")
+    bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name="bank_offer")
     
     def __str__(self):
         return f"{self.Project.project_name} - {self.bank.title}"

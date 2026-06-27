@@ -100,9 +100,9 @@
                     {% endif %}
 
 
-                          <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur text-white text-[11px] font-semibold px-3 py-1 shadow-md border border-white/20">
-                            {{ rs.construction_status }}
-                          </span>
+                    <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur text-white text-[11px] font-semibold px-3 py-1 shadow-md border border-white/20">
+                      {{ rs.construction_status }}
+                    </span>
 
             
                 </div>
@@ -1077,23 +1077,30 @@
         <!-- Stat 3 -->
         <div class="relative">
 
-          <!-- Rupee Coin SVG -->
-          <div class="flex justify-center mb-2">  
-            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 64 64"  class="w-10 h-10">
+
+      <div class="flex justify-center mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-10 h-10">
               <defs>
-                <radialGradient id="coinGradient" cx="30%" cy="30%" r="70%">
-                  <stop offset="0%" stop-color="#facc15"/>
-                  <stop offset="100%" stop-color="#b45309"/>
-                </radialGradient>
+                  <radialGradient id="coinGradient" cx="30%" cy="30%" r="70%">
+                      <stop offset="0%" stop-color="#facc15"/>
+                      <stop offset="100%" stop-color="#b45309"/>
+                  </radialGradient>
               </defs>
-              <!-- Coin Circle -->
-              <circle cx="32" cy="32" r="30" fill="url(#coinGradient)" />
+
+              <!-- Coin -->
+              <circle cx="32" cy="32" r="30" fill="url(#coinGradient)"/>
+
               <!-- Rupee Symbol -->
-              <text x="50%" y="55%" text-anchor="middle" font-size="28" font-weight="bold" fill="white font-family="Arial">
-                ₹
+              <text x="32" y="40"
+                    text-anchor="middle"
+                    font-size="28"
+                    font-weight="700"
+                    font-family="Arial, sans-serif"
+                    fill="white">
+                  ₹
               </text>
-            </svg>
-          </div>
+          </svg>
+      </div>
 
           <h3 class="text-3xl font-bold">3,000+</h3>
           <p class="text-gray-400 mt-1">Homes Booked</p>
@@ -1242,7 +1249,12 @@
         <div class="dev-card">
 
           <div class="logo">
+            {% if dev.logo %}
             <img src="{{ dev.logo.url }}" alt="{{ dev.name }}" class="h-full w-full object-contain bg-cover">
+          {% else %}
+            <img src="{% static '' %}images/image.png" alt="{{ dev.name }}" class="h-full w-full object-contain bg-cover">
+          {% endif %}
+
           </div>
 
           <div class="footer-badge">

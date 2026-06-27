@@ -108,7 +108,7 @@ def search_projects(request):
         amenity_list = [a.strip() for a in amenities.split(",") if a.strip()]
         if amenity_list:
             projects = projects.filter(
-                project_amenities__amenities__title__in=amenity_list
+                amenities__amenities__title__in=amenity_list
             ).distinct()
 
     # 🚧 Status
@@ -129,7 +129,7 @@ def search_projects(request):
 
     # ⚡ Optimize + Pagination
     projects = projects.select_related("city", "locality", "developer")\
-        .prefetch_related("project_amenities__amenities")\
+        .prefetch_related("amenities__amenities")\
         .order_by("-create_at")
 
     paginator = Paginator(projects, 9)
@@ -154,7 +154,6 @@ def search_projects(request):
     }
 
     return render(request, "projects/residential_list.html", context)
-   
    
 def residential_projects(request):
     settings_obj = Setting.objects.first()
@@ -235,12 +234,10 @@ def residential_projects(request):
 
     # 🏊 Amenities
     selected_amenities_list = []
-    if amenities:
-        selected_amenities_list = [a.strip() for a in amenities.split(",") if a.strip()]
-        if selected_amenities_list:
-            projects = projects.filter(
-                project_amenities__amenities__title__in=selected_amenities_list
-            ).distinct()
+    if amenity_list:
+        projects = projects.filter(
+            amenities__amenities__title__in=amenity_list
+        ).distinct()
 
     # 📜 RERA
     if rera:
@@ -347,7 +344,6 @@ def project_details(request, id, slug):
 
     return render(request, "projects/project_detail.html", context)
 
-# 🏢 Commercial Projects
 def commercial_projects(request):
     query = request.GET.get('q', '')
     projects = Project.objects.filter(
@@ -395,3 +391,4 @@ def load_localities(request):
     city_id = request.GET.get("city_id")
     localities = Locality.objects.filter(city_id=city_id).values("id", "name")
     return JsonResponse(list(localities), safe=False)
+
