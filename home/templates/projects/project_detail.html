@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-{% load price_filters %}
+{% load indian_price %}
 {% load utility_tags %} 
 {% load humanize %}
 {% block content %}
@@ -507,7 +507,8 @@
                             {% if c.sold_out %}
                                 <span class="text-red-600 text-xs uppercase font-bold">Sold Out</span>
                             {% else %}
-                                {{ c.formatted_price }}
+                                ₹ {{ c.price_in_rupees|indian_price }}
+                                
                             {% endif %}
                             </td>
 

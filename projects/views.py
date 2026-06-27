@@ -321,8 +321,7 @@ def project_details(request, id, slug):
         )[:8]
 
     # ✅ AMENITIES
-    project_amenities = project.project_amenities.all().distinct()
-    has_balcony = project.configurations.filter(balcony=True).exists()
+    project_amenities = project.amenities.select_related("amenities").all().distinct()
     project_faqs = project.faqs.all()
     bank_offers = project.bank_offers.all()
     footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
@@ -338,11 +337,11 @@ def project_details(request, id, slug):
         "bank_offers": bank_offers,
         "project_amenities": project_amenities,
         "project_faqs": project_faqs,   # ✅ ADD THIS
-        "has_balcony": has_balcony,   
         "footerlink": footerlink,
     }
 
     return render(request, "projects/project_detail.html", context)
+
 
 def commercial_projects(request):
     query = request.GET.get('q', '')
